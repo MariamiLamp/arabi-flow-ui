@@ -2,9 +2,10 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
+import Image from "@tiptap/extension-image";
 import { TextStyle } from "@tiptap/extension-text-style";
 import Color from "@tiptap/extension-color";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -25,6 +26,7 @@ import {
   Quote,
   Code,
   Minus,
+  ImagePlus,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -67,6 +69,20 @@ export const RichTextEditor = ({
   placeholder,
   dir = "rtl",
 }: RichTextEditorProps) => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !editor) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const url = reader.result as string;
+      editor.chain().focus().setImage({ src: url }).run();
+    };
+    reader.readAsDataURL(file);
+    e.target.value = "";
+  };
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -77,6 +93,7 @@ export const RichTextEditor = ({
       Underline,
       TextStyle,
       Color,
+      Image.configure({ inline: false, allowBase64: true }),
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
@@ -243,6 +260,19 @@ export const RichTextEditor = ({
         >
           <Minus className="h-4 w-4" />
         </MenuButton>
+        <MenuButton
+          onClick={() => fileInputRef.current?.click()}
+          title="إدراج صورة"
+        >
+          <ImagePlus className="h-4 w-4" />
+        </MenuButton>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={handleImageUpload}
+        />
       </div>
 
       {/* Editor */}
