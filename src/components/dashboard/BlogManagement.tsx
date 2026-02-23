@@ -323,7 +323,7 @@ export const BlogManagement = () => {
 
         {/* Article Dialog */}
         <Dialog open={isArticleDialogOpen} onOpenChange={setIsArticleDialogOpen}>
-          <DialogContent dir="rtl" className="max-w-2xl">
+          <DialogContent dir="rtl" className="max-w-2xl max-h-[90vh] overflow-y-auto w-[95vw] sm:w-full">
             <DialogHeader>
               <DialogTitle className="text-right">
                 {editingArticle ? "تعديل المقال" : "إضافة مقال جديد"}
@@ -348,7 +348,7 @@ export const BlogManagement = () => {
                   placeholder="وصف مختصر للمقال"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label className="text-right block">التصنيف</Label>
                   <Select
