@@ -88,7 +88,7 @@ export const RichTextEditor = ({
     editorProps: {
       attributes: {
         class:
-          "prose prose-sm max-w-none min-h-[200px] p-3 focus:outline-none text-right",
+          "tiptap-editor min-h-[200px] p-3 focus:outline-none text-right",
         dir,
       },
     },
