@@ -215,14 +215,21 @@ export const BlogManagement = () => {
       </CardHeader>
       <CardContent>
         <Tabs value={blogTab} onValueChange={setBlogTab}>
-          <div className="flex items-center justify-between mb-4">
-            <TabsList>
-              <TabsTrigger value="articles">المقالات</TabsTrigger>
-              <TabsTrigger value="categories">التصنيفات</TabsTrigger>
+          <div className="flex flex-col-reverse sm:flex-row items-start sm:items-center justify-between gap-3 mb-6 border-b pb-4">
+            <TabsList className="w-full sm:w-auto">
+              <TabsTrigger value="articles" className="flex-1 sm:flex-none gap-1.5">
+                <FileText className="w-4 h-4" />
+                المقالات
+              </TabsTrigger>
+              <TabsTrigger value="categories" className="flex-1 sm:flex-none gap-1.5">
+                <FolderOpen className="w-4 h-4" />
+                التصنيفات
+              </TabsTrigger>
             </TabsList>
             <Button
               size="sm"
               onClick={blogTab === "articles" ? handleAddArticle : handleAddCategory}
+              className="w-full sm:w-auto"
             >
               <Plus className="w-4 h-4 ml-2" />
               {blogTab === "articles" ? "إضافة مقال" : "إضافة تصنيف"}
