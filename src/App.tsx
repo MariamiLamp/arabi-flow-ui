@@ -34,6 +34,8 @@ import ContactUs from "./pages/ContactUs";
 import ProfileViews from "./pages/ProfileViews";
 import Blog from "./pages/Blog";
 import ArticleDetail from "./pages/ArticleDetail";
+import Unauthorized from "./pages/Unauthorized";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -56,8 +58,10 @@ const App = () => (
               <Route path="/cv-builder" element={<CVBuilder />} />
               <Route path="/subscription" element={<Subscription />} />
               <Route path="/auth" element={<Auth />} />
-              <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="/company" element={<CompanyDashboard />} />
+              <Route path="/unauthorized" element={<Unauthorized />} />
+              <Route path="/admin" element={<ProtectedRoute allowedRoles={["admin"]}><AdminDashboard /></ProtectedRoute>} />
+              <Route path="/company" element={<ProtectedRoute allowedRoles={["company"]}><CompanyDashboard /></ProtectedRoute>} />
+              <Route path="/hr" element={<ProtectedRoute allowedRoles={["admin", "company"]}><HRDashboard /></ProtectedRoute>} />
               <Route path="/candidate/:id" element={<CandidateProfile />} />
               <Route path="/profile-views" element={<ProfileViews />} />
               <Route path="/register" element={<Register />} />
@@ -70,7 +74,6 @@ const App = () => (
                 element={<CompanyRegistration />}
               />
               <Route path="/register/hr" element={<HRRegistration />} />
-              <Route path="/hr" element={<HRDashboard />} />
               <Route path="/templates" element={<TemplatesMarketplace />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
