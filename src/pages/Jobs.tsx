@@ -255,7 +255,7 @@ ${applicationForm.fullName || "[اسمك]"}`;
                 </div>
                 <div className="flex-1">
                   <h2 className="text-xl font-bold text-foreground mb-1">{selectedJob.title}</h2>
-                  <p className="text-primary font-medium mb-2">{selectedJob.company}</p>
+                  <Link to={`/company-profile/${selectedJob.companyId}`} className="text-primary font-medium mb-2 hover:underline inline-block">{selectedJob.company}</Link>
                   <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                     <span className="flex items-center gap-1">
                       <MapPin className="w-4 h-4" />
