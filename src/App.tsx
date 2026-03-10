@@ -35,6 +35,7 @@ import ProfileViews from "./pages/ProfileViews";
 import Blog from "./pages/Blog";
 import ArticleDetail from "./pages/ArticleDetail";
 import Unauthorized from "./pages/Unauthorized";
+import CompanyProfile from "./pages/CompanyProfile";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
