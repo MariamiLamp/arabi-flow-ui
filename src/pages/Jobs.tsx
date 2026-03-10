@@ -35,6 +35,7 @@ const jobs = [
     id: 1,
     title: "مطور واجهات أمامية أول",
     company: "شركة التقنية المتقدمة",
+    companyId: "1",
     location: "الرياض، السعودية",
     type: "دوام كامل",
     matchScore: 95,
@@ -46,6 +47,7 @@ const jobs = [
     id: 2,
     title: "مهندس برمجيات",
     company: "مؤسسة الابتكار الرقمي",
+    companyId: "2",
     location: "جدة، السعودية",
     type: "عن بُعد",
     matchScore: 88,
@@ -57,6 +59,7 @@ const jobs = [
     id: 3,
     title: "مصمم تجربة مستخدم",
     company: "استوديو التصميم الإبداعي",
+    companyId: "1",
     location: "دبي، الإمارات",
     type: "دوام جزئي",
     matchScore: 82,
@@ -68,6 +71,7 @@ const jobs = [
     id: 4,
     title: "محلل بيانات",
     company: "شركة البيانات الذكية",
+    companyId: "2",
     location: "الرياض، السعودية",
     type: "دوام كامل",
     matchScore: 76,
@@ -78,6 +82,7 @@ const jobs = [
     id: 5,
     title: "مدير مشاريع تقنية",
     company: "شركة الحلول المتكاملة",
+    companyId: "1",
     location: "الدمام، السعودية",
     type: "دوام كامل",
     matchScore: 71,
@@ -89,6 +94,7 @@ const jobs = [
     id: 6,
     title: "مطور تطبيقات موبايل",
     company: "شركة التطبيقات الذكية",
+    companyId: "2",
     location: "عن بُعد",
     type: "عقد مؤقت",
     matchScore: 68,
@@ -249,7 +255,7 @@ ${applicationForm.fullName || "[اسمك]"}`;
                 </div>
                 <div className="flex-1">
                   <h2 className="text-xl font-bold text-foreground mb-1">{selectedJob.title}</h2>
-                  <p className="text-primary font-medium mb-2">{selectedJob.company}</p>
+                  <Link to={`/company-profile/${selectedJob.companyId}`} className="text-primary font-medium mb-2 hover:underline inline-block">{selectedJob.company}</Link>
                   <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                     <span className="flex items-center gap-1">
                       <MapPin className="w-4 h-4" />
@@ -365,7 +371,7 @@ ${applicationForm.fullName || "[اسمك]"}`;
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-muted-foreground">{job.company}</p>
+                      <Link to={`/company-profile/${job.companyId}`} onClick={(e) => e.stopPropagation()} className="text-xs text-muted-foreground hover:text-primary hover:underline">{job.company}</Link>
                     </div>
                     <button
                       onClick={(e) => {

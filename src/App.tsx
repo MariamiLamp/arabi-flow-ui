@@ -35,6 +35,7 @@ import ProfileViews from "./pages/ProfileViews";
 import Blog from "./pages/Blog";
 import ArticleDetail from "./pages/ArticleDetail";
 import Unauthorized from "./pages/Unauthorized";
+import CompanyProfile from "./pages/CompanyProfile";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
@@ -81,6 +82,7 @@ const App = () => (
               <Route path="/settings" element={<Settings />} />
               <Route path="/notifications" element={<Notifications />} />
               <Route path="/contact" element={<ContactUs />} />
+              <Route path="/company-profile/:id" element={<CompanyProfile />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/article/:id" element={<ArticleDetail />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
