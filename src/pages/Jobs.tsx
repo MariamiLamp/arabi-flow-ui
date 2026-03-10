@@ -371,7 +371,7 @@ ${applicationForm.fullName || "[اسمك]"}`;
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-muted-foreground">{job.company}</p>
+                      <Link to={`/company-profile/${job.companyId}`} onClick={(e) => e.stopPropagation()} className="text-xs text-muted-foreground hover:text-primary hover:underline">{job.company}</Link>
                     </div>
                     <button
                       onClick={(e) => {
