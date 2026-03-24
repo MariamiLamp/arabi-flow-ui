@@ -630,22 +630,7 @@ const AdminDashboard = () => {
     });
   };
 
-  // Plans state
-  const [plans, setPlans] = useState(mockPlans);
-  const [isPlanDialogOpen, setIsPlanDialogOpen] = useState(false);
-  const [editingPlan, setEditingPlan] = useState<(typeof mockPlans)[0] | null>(
-    null,
-  );
-  const [planForm, setPlanForm] = useState({
-    name: "",
-    price: 0,
-    period: "شهري",
-    features: "",
-    type: "jobseeker",
-    discount: 0,
-    discountStart: "",
-    discountEnd: "",
-  });
+  // Plans state removed - now handled by SubscriptionManagement component
 
   const handleExportCSV = () => {
     const headers = [
