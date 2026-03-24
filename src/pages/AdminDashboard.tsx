@@ -95,6 +95,7 @@ import { DataTableFilters } from "@/components/dashboard/DataTableFilters";
 import { AdminDashboardLayout } from "@/components/layout/AdminDashboardLayout";
 import { FinancialReports } from "@/components/dashboard/FinancialReports";
 import { BlogManagement } from "@/components/dashboard/BlogManagement";
+import { SubscriptionManagement } from "@/components/dashboard/SubscriptionManagement";
 
 // Mock data - Users
 const mockUsers = [
