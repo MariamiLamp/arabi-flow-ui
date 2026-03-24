@@ -1008,10 +1008,7 @@ const AdminDashboard = () => {
     },
   ];
 
-  const totalPlanRevenue = plans.reduce(
-    (sum, p) => sum + p.price * p.usersCount,
-    0,
-  );
+  const totalPlanRevenue = 0; // Now managed by SubscriptionManagement
   const totalTemplateDownloads = templates.reduce(
     (sum, t) => sum + t.downloads,
     0,
