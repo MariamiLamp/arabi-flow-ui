@@ -288,7 +288,6 @@ export const SubscriptionManagement = () => {
       const newFeature: Feature = {
         id: `f${Date.now()}`,
         name: featureForm.name,
-        key: featureForm.key,
         description: featureForm.description,
       };
       setFeatures([...features, newFeature]);
@@ -760,7 +759,7 @@ export const SubscriptionManagement = () => {
                       />
                       <div className="flex-1 text-right">
                         <p className="text-sm font-medium">{feature.name}</p>
-                        <p className="text-xs text-muted-foreground">{feature.key}</p>
+                        <p className="text-xs text-muted-foreground">{feature.description}</p>
                       </div>
                       {isSelected && (
                         <div className="flex items-center gap-2">
@@ -804,18 +803,6 @@ export const SubscriptionManagement = () => {
             <div className="space-y-2">
               <Label>اسم الميزة</Label>
               <Input value={featureForm.name} onChange={e => setFeatureForm({ ...featureForm, name: e.target.value })} placeholder="مثال: فحص السيرة الذاتية" />
-            </div>
-            <div className="space-y-2">
-              <Label>المفتاح (key)</Label>
-              <Input
-                value={featureForm.key}
-                onChange={e => setFeatureForm({ ...featureForm, key: e.target.value })}
-                placeholder="مثال: cv_check"
-                dir="ltr"
-                className="text-right"
-                disabled={!!editingFeature}
-              />
-              {editingFeature && <p className="text-xs text-muted-foreground">لا يمكن تعديل المفتاح</p>}
             </div>
             <div className="space-y-2">
               <Label>الوصف</Label>
