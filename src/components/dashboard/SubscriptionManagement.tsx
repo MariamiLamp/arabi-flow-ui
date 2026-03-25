@@ -408,86 +408,84 @@ export const SubscriptionManagement = () => {
 
         {/* ========== PLANS TAB ========== */}
         <TabsContent value="plans">
-          <Tabs defaultValue="job_seeker" className="space-y-4">
-            <TabsList className="bg-muted/50 p-1 flex justify-start md:justify-end overflow-x-auto no-scrollbar gap-1 whitespace-nowrap">
-              <TabsTrigger value="hr" className="gap-2 shrink-0"><UserCheck className="w-4 h-4" />HR</TabsTrigger>
-              <TabsTrigger value="company" className="gap-2 shrink-0"><Building2 className="w-4 h-4" />شركات</TabsTrigger>
-              <TabsTrigger value="job_seeker" className="gap-2 shrink-0"><Users className="w-4 h-4" />أفراد</TabsTrigger>
-            </TabsList>
-
-            {(["job_seeker", "company", "hr"] as const).map(role => (
-              <TabsContent key={role} value={role}>
-                <Card>
-                  <CardHeader className="flex flex-col md:flex-row-reverse items-start md:items-center justify-between gap-4 p-4 md:p-6">
-                    <CardTitle className="flex items-center gap-2 text-base md:text-lg">
-                      <span>خطط {roleLabels[role]}</span>
-                      {(() => { const Icon = roleIcons[role]; return <Icon className="w-5 h-5 text-primary" />; })()}
-                    </CardTitle>
-                    <Button onClick={handleAddPlan} className="gap-2 w-full md:w-auto h-9 text-xs md:text-sm">
-                      <Plus className="w-4 h-4" />
-                      إضافة خطة
-                    </Button>
-                  </CardHeader>
-                  <CardContent className="p-0">
-                    <div className="overflow-x-auto">
-                      <Table dir="ltr" className="text-right [&_th]:text-right [&_td]:text-right">
-                        <TableHeader>
-                          <TableRow className="bg-muted/30">
-                            <TableHead>الإجراءات</TableHead>
-                            <TableHead>الحالة</TableHead>
-                            <TableHead>عدد الإصدارات</TableHead>
-                            <TableHead>الوصف</TableHead>
-                            <TableHead>تاريخ الإنشاء</TableHead>
-                            <TableHead className="font-black sticky right-0 bg-background z-10 shadow-[-4px_0_10px_-4px_rgba(0,0,0,0.1)]">اسم الخطة</TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {plans.filter(p => p.targetRole === role).map(plan => (
-                            <TableRow key={plan.id}>
-                              <TableCell>
-                                <div className="flex gap-2 justify-end">
-                                  <Button variant="ghost" size="icon" onClick={() => handleEditPlan(plan)}>
-                                    <Edit className="w-4 h-4" />
-                                  </Button>
-                                  <Button
-                                    variant="outline"
-                                    size="sm"
-                                    onClick={() => handleTogglePlan(plan.id)}
-                                    className={plan.isActive
-                                      ? "text-red-600 border-red-200 hover:bg-red-50 h-8 px-3 text-xs"
-                                      : "text-emerald-600 border-emerald-200 hover:bg-emerald-50 h-8 px-3 text-xs"
-                                    }
-                                  >
-                                    {plan.isActive ? "إيقاف" : "تفعيل"}
-                                  </Button>
-                                </div>
-                              </TableCell>
-                              <TableCell>
-                                <Badge
-                                  variant={plan.isActive ? "default" : "secondary"}
-                                  className={plan.isActive ? "bg-emerald-500 hover:bg-emerald-600" : "bg-amber-500 hover:bg-amber-600 text-white"}
-                                >
-                                  {plan.isActive ? "نشطة" : "معطلة"}
-                                </Badge>
-                              </TableCell>
-                              <TableCell>
-                                <Badge variant="secondary">{versions.filter(v => v.planId === plan.id).length} إصدار</Badge>
-                              </TableCell>
-                              <TableCell className="text-muted-foreground text-xs max-w-[200px] truncate">{plan.description}</TableCell>
-                              <TableCell className="text-muted-foreground font-mono text-xs">{plan.createdAt}</TableCell>
-                              <TableCell className="font-bold sticky right-0 bg-background/95 backdrop-blur-sm z-10 shadow-[-4px_0_10px_-4px_rgba(0,0,0,0.1)]">
-                                {plan.name}
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            ))}
-          </Tabs>
+          <Card>
+            <CardHeader className="flex flex-col md:flex-row-reverse items-start md:items-center justify-between gap-4 p-4 md:p-6">
+              <CardTitle className="flex items-center gap-2 text-base md:text-lg">
+                <span>جميع الخطط</span>
+                <Package className="w-5 h-5 text-primary" />
+              </CardTitle>
+              <Button onClick={handleAddPlan} className="gap-2 w-full md:w-auto h-9 text-xs md:text-sm">
+                <Plus className="w-4 h-4" />
+                إضافة خطة
+              </Button>
+            </CardHeader>
+            <CardContent className="p-0">
+              <div className="overflow-x-auto">
+                <Table dir="ltr" className="text-right [&_th]:text-right [&_td]:text-right">
+                  <TableHeader>
+                    <TableRow className="bg-muted/30">
+                      <TableHead>الإجراءات</TableHead>
+                      <TableHead>الحالة</TableHead>
+                      <TableHead>عدد الإصدارات</TableHead>
+                      <TableHead>الفئة المستهدفة</TableHead>
+                      <TableHead>الوصف</TableHead>
+                      <TableHead>تاريخ الإنشاء</TableHead>
+                      <TableHead className="font-black sticky right-0 bg-background z-10 shadow-[-4px_0_10px_-4px_rgba(0,0,0,0.1)]">اسم الخطة</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {plans.map(plan => {
+                      const RoleIcon = roleIcons[plan.targetRole];
+                      return (
+                        <TableRow key={plan.id}>
+                          <TableCell>
+                            <div className="flex gap-2 justify-end">
+                              <Button variant="ghost" size="icon" onClick={() => handleEditPlan(plan)}>
+                                <Edit className="w-4 h-4" />
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleTogglePlan(plan.id)}
+                                className={plan.isActive
+                                  ? "text-red-600 border-red-200 hover:bg-red-50 h-8 px-3 text-xs"
+                                  : "text-emerald-600 border-emerald-200 hover:bg-emerald-50 h-8 px-3 text-xs"
+                                }
+                              >
+                                {plan.isActive ? "إيقاف" : "تفعيل"}
+                              </Button>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <Badge
+                              variant={plan.isActive ? "default" : "secondary"}
+                              className={plan.isActive ? "bg-emerald-500 hover:bg-emerald-600" : "bg-amber-500 hover:bg-amber-600 text-white"}
+                            >
+                              {plan.isActive ? "نشطة" : "معطلة"}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="secondary">{versions.filter(v => v.planId === plan.id).length} إصدار</Badge>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-1.5 justify-end">
+                              <span className="text-xs font-medium">{roleLabels[plan.targetRole]}</span>
+                              <RoleIcon className="w-4 h-4 text-muted-foreground" />
+                            </div>
+                          </TableCell>
+                          <TableCell className="text-muted-foreground text-xs max-w-[200px] truncate">{plan.description}</TableCell>
+                          <TableCell className="text-muted-foreground font-mono text-xs">{plan.createdAt}</TableCell>
+                          <TableCell className="font-bold sticky right-0 bg-background/95 backdrop-blur-sm z-10 shadow-[-4px_0_10px_-4px_rgba(0,0,0,0.1)]">
+                            {plan.name}
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
 
         {/* ========== VERSIONS TAB ========== */}
