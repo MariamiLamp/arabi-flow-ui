@@ -78,7 +78,6 @@ interface PlanVersion {
 interface Feature {
   id: string;
   name: string;
-  key: string;
   description: string;
 }
 
@@ -112,16 +111,16 @@ const mockVersions: PlanVersion[] = [
 ];
 
 const mockFeatures: Feature[] = [
-  { id: "f1", name: "فحص السيرة الذاتية", key: "cv_check", description: "فحص وتقييم السيرة الذاتية" },
-  { id: "f2", name: "طلبات التوظيف", key: "job_applications", description: "التقديم على الوظائف" },
-  { id: "f3", name: "خطابات التقديم AI", key: "ai_cover_letter", description: "توليد خطابات التقديم بالذكاء الاصطناعي" },
-  { id: "f4", name: "المسار المهني", key: "career_path", description: "تتبع المسار المهني" },
-  { id: "f5", name: "أسئلة المقابلات", key: "interview_questions", description: "أسئلة تجريبية للمقابلات" },
-  { id: "f6", name: "منشئ السيرة الذاتية", key: "cv_builder", description: "أداة بناء السيرة الذاتية" },
-  { id: "f7", name: "مقابلات AI", key: "ai_interview", description: "مقابلات تجريبية بالذكاء الاصطناعي" },
-  { id: "f8", name: "بحث السير الذاتية", key: "cv_search", description: "بحث في قاعدة السير الذاتية" },
-  { id: "f9", name: "نشر الوظائف", key: "job_posting", description: "نشر إعلانات الوظائف" },
-  { id: "f10", name: "الدردشة AI", key: "ai_chat", description: "المحادثة مع الذكاء الاصطناعي" },
+  { id: "f1", name: "فحص السيرة الذاتية", description: "فحص وتقييم السيرة الذاتية" },
+  { id: "f2", name: "طلبات التوظيف", description: "التقديم على الوظائف" },
+  { id: "f3", name: "خطابات التقديم AI", description: "توليد خطابات التقديم بالذكاء الاصطناعي" },
+  { id: "f4", name: "المسار المهني", description: "تتبع المسار المهني" },
+  { id: "f5", name: "أسئلة المقابلات", description: "أسئلة تجريبية للمقابلات" },
+  { id: "f6", name: "منشئ السيرة الذاتية", description: "أداة بناء السيرة الذاتية" },
+  { id: "f7", name: "مقابلات AI", description: "مقابلات تجريبية بالذكاء الاصطناعي" },
+  { id: "f8", name: "بحث السير الذاتية", description: "بحث في قاعدة السير الذاتية" },
+  { id: "f9", name: "نشر الوظائف", description: "نشر إعلانات الوظائف" },
+  { id: "f10", name: "الدردشة AI", description: "المحادثة مع الذكاء الاصطناعي" },
 ];
 
 const mockPlanFeatures: PlanFeature[] = [
@@ -171,7 +170,7 @@ export const SubscriptionManagement = () => {
   const [features, setFeatures] = useState<Feature[]>(mockFeatures);
   const [isFeatureDialogOpen, setIsFeatureDialogOpen] = useState(false);
   const [editingFeature, setEditingFeature] = useState<Feature | null>(null);
-  const [featureForm, setFeatureForm] = useState({ name: "", key: "", description: "" });
+  const [featureForm, setFeatureForm] = useState({ name: "", description: "" });
   const [featureToDelete, setFeatureToDelete] = useState<string | null>(null);
 
   // Plan features state
@@ -267,18 +266,18 @@ export const SubscriptionManagement = () => {
   // =========== FEATURE HANDLERS ===========
   const handleAddFeature = () => {
     setEditingFeature(null);
-    setFeatureForm({ name: "", key: "", description: "" });
+    setFeatureForm({ name: "", description: "" });
     setIsFeatureDialogOpen(true);
   };
 
   const handleEditFeature = (feature: Feature) => {
     setEditingFeature(feature);
-    setFeatureForm({ name: feature.name, key: feature.key, description: feature.description });
+    setFeatureForm({ name: feature.name, description: feature.description });
     setIsFeatureDialogOpen(true);
   };
 
   const handleSaveFeature = () => {
-    if (!featureForm.name.trim() || !featureForm.key.trim()) {
+    if (!featureForm.name.trim()) {
       toast({ title: "خطأ", description: "يرجى ملء جميع الحقول المطلوبة", variant: "destructive" });
       return;
     }
@@ -289,7 +288,6 @@ export const SubscriptionManagement = () => {
       const newFeature: Feature = {
         id: `f${Date.now()}`,
         name: featureForm.name,
-        key: featureForm.key,
         description: featureForm.description,
       };
       setFeatures([...features, newFeature]);
@@ -624,7 +622,7 @@ export const SubscriptionManagement = () => {
                       <TableHead>الإجراءات</TableHead>
                       <TableHead>مستخدمة في</TableHead>
                       <TableHead>الوصف</TableHead>
-                      <TableHead>المفتاح</TableHead>
+                      <TableHead className="font-black">اسم الميزة</TableHead>
                       <TableHead className="font-black">اسم الميزة</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -656,7 +654,6 @@ export const SubscriptionManagement = () => {
                             </Badge>
                           </TableCell>
                           <TableCell className="text-muted-foreground text-xs max-w-[250px] truncate">{feature.description}</TableCell>
-                          <TableCell className="font-mono text-xs text-muted-foreground">{feature.key}</TableCell>
                           <TableCell className="font-bold">{feature.name}</TableCell>
                         </TableRow>
                       );
@@ -762,7 +759,7 @@ export const SubscriptionManagement = () => {
                       />
                       <div className="flex-1 text-right">
                         <p className="text-sm font-medium">{feature.name}</p>
-                        <p className="text-xs text-muted-foreground">{feature.key}</p>
+                        <p className="text-xs text-muted-foreground">{feature.description}</p>
                       </div>
                       {isSelected && (
                         <div className="flex items-center gap-2">
@@ -806,18 +803,6 @@ export const SubscriptionManagement = () => {
             <div className="space-y-2">
               <Label>اسم الميزة</Label>
               <Input value={featureForm.name} onChange={e => setFeatureForm({ ...featureForm, name: e.target.value })} placeholder="مثال: فحص السيرة الذاتية" />
-            </div>
-            <div className="space-y-2">
-              <Label>المفتاح (key)</Label>
-              <Input
-                value={featureForm.key}
-                onChange={e => setFeatureForm({ ...featureForm, key: e.target.value })}
-                placeholder="مثال: cv_check"
-                dir="ltr"
-                className="text-right"
-                disabled={!!editingFeature}
-              />
-              {editingFeature && <p className="text-xs text-muted-foreground">لا يمكن تعديل المفتاح</p>}
             </div>
             <div className="space-y-2">
               <Label>الوصف</Label>
