@@ -525,7 +525,6 @@ export const SubscriptionManagement = () => {
                           <TableHead>الميزات</TableHead>
                           <TableHead>السعر السنوي</TableHead>
                           <TableHead>السعر الشهري</TableHead>
-                          <TableHead>العملة</TableHead>
                           <TableHead className="font-black">رقم الإصدار</TableHead>
                         </TableRow>
                       </TableHeader>
@@ -581,7 +580,6 @@ export const SubscriptionManagement = () => {
                               </TableCell>
                               <TableCell className="font-mono text-xs">{version.yearlyPrice} {version.currency}</TableCell>
                               <TableCell className="font-mono text-xs">{version.monthlyPrice} {version.currency}</TableCell>
-                              <TableCell className="text-xs">{version.currency}</TableCell>
                               <TableCell className="font-bold">v{version.versionNumber}</TableCell>
                             </TableRow>
                           );
