@@ -68,9 +68,9 @@ interface SubscriptionPlan {
 interface PlanVersion {
   id: string;
   planId: string;
-  price: number;
+  monthlyPrice: number;
+  yearlyPrice: number;
   currency: string;
-  billingPeriod: "monthly" | "yearly";
   versionNumber: number;
   isActive: boolean;
 }
@@ -100,14 +100,13 @@ const mockPlans: SubscriptionPlan[] = [
 ];
 
 const mockVersions: PlanVersion[] = [
-  { id: "v1", planId: "p1", price: 0, currency: "EGP", billingPeriod: "monthly", versionNumber: 1, isActive: true },
-  { id: "v2", planId: "p2", price: 49, currency: "EGP", billingPeriod: "monthly", versionNumber: 1, isActive: true },
-  { id: "v3", planId: "p2", price: 470, currency: "EGP", billingPeriod: "yearly", versionNumber: 2, isActive: true },
-  { id: "v4", planId: "p3", price: 99, currency: "EGP", billingPeriod: "monthly", versionNumber: 1, isActive: true },
-  { id: "v5", planId: "p4", price: 299, currency: "EGP", billingPeriod: "monthly", versionNumber: 1, isActive: true },
-  { id: "v6", planId: "p5", price: 599, currency: "EGP", billingPeriod: "monthly", versionNumber: 1, isActive: true },
-  { id: "v7", planId: "p6", price: 199, currency: "EGP", billingPeriod: "monthly", versionNumber: 1, isActive: true },
-  { id: "v8", planId: "p7", price: 450, currency: "EGP", billingPeriod: "monthly", versionNumber: 1, isActive: true },
+  { id: "v1", planId: "p1", monthlyPrice: 0, yearlyPrice: 0, currency: "EGP", versionNumber: 1, isActive: true },
+  { id: "v2", planId: "p2", monthlyPrice: 49, yearlyPrice: 470, currency: "EGP", versionNumber: 1, isActive: true },
+  { id: "v3", planId: "p3", monthlyPrice: 99, yearlyPrice: 950, currency: "EGP", versionNumber: 1, isActive: true },
+  { id: "v4", planId: "p4", monthlyPrice: 299, yearlyPrice: 2870, currency: "EGP", versionNumber: 1, isActive: true },
+  { id: "v5", planId: "p5", monthlyPrice: 599, yearlyPrice: 5750, currency: "EGP", versionNumber: 1, isActive: true },
+  { id: "v6", planId: "p6", monthlyPrice: 199, yearlyPrice: 1910, currency: "EGP", versionNumber: 1, isActive: true },
+  { id: "v7", planId: "p7", monthlyPrice: 450, yearlyPrice: 4320, currency: "EGP", versionNumber: 1, isActive: true },
 ];
 
 const mockFeatures: Feature[] = [
@@ -159,7 +158,7 @@ export const SubscriptionManagement = () => {
   // Versions state
   const [versions, setVersions] = useState<PlanVersion[]>(mockVersions);
   const [isVersionDialogOpen, setIsVersionDialogOpen] = useState(false);
-  const [versionForm, setVersionForm] = useState({ planId: "", price: 0, currency: "EGP", billingPeriod: "monthly" as string });
+  const [versionForm, setVersionForm] = useState({ planId: "", monthlyPrice: 0, yearlyPrice: 0, currency: "EGP" });
   const [selectedRoleForVersions, setSelectedRoleForVersions] = useState("job_seeker");
   const [expandedPlanId, setExpandedPlanId] = useState<string | null>(null);
 
@@ -223,7 +222,7 @@ export const SubscriptionManagement = () => {
 
   // =========== VERSION HANDLERS ===========
   const handleAddVersion = (planId: string) => {
-    setVersionForm({ planId, price: 0, currency: "EGP", billingPeriod: "monthly" });
+    setVersionForm({ planId, monthlyPrice: 0, yearlyPrice: 0, currency: "EGP" });
     setVersionFeatures([]);
     setIsVersionDialogOpen(true);
   };
@@ -236,9 +235,9 @@ export const SubscriptionManagement = () => {
     const newVersion: PlanVersion = {
       id: newVersionId,
       planId: versionForm.planId,
-      price: versionForm.price,
+      monthlyPrice: versionForm.monthlyPrice,
+      yearlyPrice: versionForm.yearlyPrice,
       currency: versionForm.currency,
-      billingPeriod: versionForm.billingPeriod as any,
       versionNumber: nextVersion,
       isActive: true,
     };
@@ -524,8 +523,8 @@ export const SubscriptionManagement = () => {
                           <TableHead>الإجراءات</TableHead>
                           <TableHead>الحالة</TableHead>
                           <TableHead>الميزات</TableHead>
-                          <TableHead>فترة الفوترة</TableHead>
-                          <TableHead>السعر</TableHead>
+                          <TableHead>السعر السنوي</TableHead>
+                          <TableHead>السعر الشهري</TableHead>
                           <TableHead className="font-black">رقم الإصدار</TableHead>
                         </TableRow>
                       </TableHeader>
@@ -579,15 +578,15 @@ export const SubscriptionManagement = () => {
                                   )}
                                 </div>
                               </TableCell>
-                              <TableCell>{version.billingPeriod === "monthly" ? "شهري" : "سنوي"}</TableCell>
-                              <TableCell className="font-mono">{version.price} {version.currency}</TableCell>
+                              <TableCell className="font-mono text-xs">{version.yearlyPrice} {version.currency}</TableCell>
+                              <TableCell className="font-mono text-xs">{version.monthlyPrice} {version.currency}</TableCell>
                               <TableCell className="font-bold">v{version.versionNumber}</TableCell>
                             </TableRow>
                           );
                         })}
                         {versions.filter(v => v.planId === plan.id).length === 0 && (
                           <TableRow>
-                            <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                            <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
                               لا توجد إصدارات بعد
                             </TableCell>
                           </TableRow>
@@ -715,10 +714,14 @@ export const SubscriptionManagement = () => {
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
               <div className="space-y-2">
-                <Label>السعر</Label>
-                <Input type="number" min="0" value={versionForm.price} onChange={e => setVersionForm({ ...versionForm, price: Number(e.target.value) })} />
+                <Label>السعر الشهري</Label>
+                <Input type="number" min="0" value={versionForm.monthlyPrice} onChange={e => setVersionForm({ ...versionForm, monthlyPrice: Number(e.target.value) })} />
+              </div>
+              <div className="space-y-2">
+                <Label>السعر السنوي</Label>
+                <Input type="number" min="0" value={versionForm.yearlyPrice} onChange={e => setVersionForm({ ...versionForm, yearlyPrice: Number(e.target.value) })} />
               </div>
               <div className="space-y-2">
                 <Label>العملة</Label>
@@ -731,16 +734,6 @@ export const SubscriptionManagement = () => {
                   </SelectContent>
                 </Select>
               </div>
-            </div>
-            <div className="space-y-2">
-              <Label>فترة الفوترة</Label>
-              <Select value={versionForm.billingPeriod} onValueChange={v => setVersionForm({ ...versionForm, billingPeriod: v })}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="monthly">شهري</SelectItem>
-                  <SelectItem value="yearly">سنوي</SelectItem>
-                </SelectContent>
-              </Select>
             </div>
 
             {/* Feature assignment */}
