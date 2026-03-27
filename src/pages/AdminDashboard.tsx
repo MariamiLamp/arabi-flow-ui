@@ -43,7 +43,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { useAuth } from "@/contexts/AuthContext";
+
 import { useToast } from "@/hooks/use-toast";
 import {
   Users,
@@ -455,7 +455,6 @@ const revenueByType = [
 ];
 
 const AdminDashboard = () => {
-  const { user, logout } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
@@ -629,10 +628,6 @@ const AdminDashboard = () => {
   const [templateToDelete, setTemplateToDelete] = useState<number | null>(null);
   const [adToDelete, setAdToDelete] = useState<number | null>(null);
 
-  const handleLogout = () => {
-    logout();
-    navigate("/auth");
-  };
 
   // Plan handlers removed - now handled by SubscriptionManagement component
 

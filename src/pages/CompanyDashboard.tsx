@@ -51,7 +51,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { useAuth } from "@/contexts/AuthContext";
+
 import { useToast } from "@/hooks/use-toast";
 import useAds, { AdPlacement } from "@/hooks/use-ads";
 import {
@@ -233,7 +233,6 @@ const initialApplications = [
 ];
 
 const CompanyDashboard = () => {
-  const { user, logout } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -370,10 +369,6 @@ const CompanyDashboard = () => {
 
   const [activeTab, setActiveTab] = useState("jobs");
 
-  const handleLogout = () => {
-    logout();
-    navigate("/auth");
-  };
 
   const handleAddJobData = (data: JobFormData) => {
     if (
