@@ -1,7 +1,5 @@
 import { useParams, Link } from "react-router-dom";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
-import { GuestLayout } from "@/components/layout/GuestLayout";
-import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -128,7 +126,6 @@ const companiesData: Record<string, {
 
 const CompanyProfile = () => {
   const { id } = useParams<{ id: string }>();
-  const { isAuthenticated } = useAuth();
   const company = companiesData[id || "1"];
 
   if (!company) {
@@ -334,11 +331,7 @@ const CompanyProfile = () => {
     </div>
   );
 
-  if (isAuthenticated) {
-    return <DashboardLayout>{content}</DashboardLayout>;
-  }
-
-  return <GuestLayout>{content}</GuestLayout>;
+  return <DashboardLayout>{content}</DashboardLayout>;
 };
 
 export default CompanyProfile;

@@ -27,8 +27,8 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Label } from "@/components/ui/label";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
-import { GuestLayout } from "@/components/layout/GuestLayout";
-import { useAuth } from "@/contexts/AuthContext";
+
+
 import {
   Search,
   FileText,
@@ -252,7 +252,7 @@ type CartItem = {
 
 const TemplatesMarketplace = () => {
   const { toast } = useToast();
-  const { isAuthenticated } = useAuth();
+  
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -340,11 +340,9 @@ const TemplatesMarketplace = () => {
     navigate("/cart");
   };
 
-  const Layout = isAuthenticated ? DashboardLayout : GuestLayout;
-
   return (
-    <Layout>
-      <div className={`space-y-6 ${!isAuthenticated ? 'container mx-auto px-6 py-8' : ''}`}>
+    <DashboardLayout>
+      <div className="space-y-6">
         {/* Header */}
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
@@ -955,7 +953,7 @@ const TemplatesMarketplace = () => {
           </div>
         </DialogContent>
       </Dialog>
-    </Layout>
+    </DashboardLayout>
   );
 };
 

@@ -42,7 +42,7 @@ import {
   User,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
+
 import { useToast } from "@/hooks/use-toast";
 import useAds from "@/hooks/use-ads";
 
@@ -127,7 +127,6 @@ const stats = [
 ];
 
 const HRDashboard = () => {
-  const { user } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("overview");
@@ -184,7 +183,7 @@ const HRDashboard = () => {
   return (
     <DashboardLayout>
       <div className="mb-8">
-        <WelcomeCard userName={user?.name || "مسؤول الموارد البشرية"} />
+        <WelcomeCard userName="مسؤول الموارد البشرية" />
       </div>
 
       {/* Hero placement ad */}

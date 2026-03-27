@@ -23,7 +23,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { useAuth } from "@/contexts/AuthContext";
+
 import {
   Popover,
   PopoverContent,
@@ -227,7 +227,6 @@ const YearPicker = ({
 };
 
 const CVBuilder = () => {
-  const { user } = useAuth();
   const { toast } = useToast();
   const [searchParams] = useSearchParams();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -291,9 +290,9 @@ const CVBuilder = () => {
   ];
 
   const [personalInfo, setPersonalInfo] = useState<PersonalInfo>({
-    fullName: initialName || user?.name || "",
+    fullName: initialName || "",
     jobTitle: initialTitle,
-    email: user?.email || "",
+    email: "",
     phone: "",
     location: "",
     website: "",
@@ -314,15 +313,8 @@ const CVBuilder = () => {
         fullName: initialName,
         jobTitle: initialTitle,
       }));
-    } else if (user && !isHRMode) {
-      // Sync with user profile if logged in as job seeker
-      setPersonalInfo((prev) => ({
-        ...prev,
-        fullName: user.name,
-        email: user.email,
-      }));
     }
-  }, [isHRMode, initialName, initialTitle, user]);
+  }, [isHRMode, initialName, initialTitle]);
 
   // Handle CV file upload
   const handleFileUpload = async (
