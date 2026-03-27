@@ -953,7 +953,7 @@ const TemplatesMarketplace = () => {
           </div>
         </DialogContent>
       </Dialog>
-    </Layout>
+    </DashboardLayout>
   );
 };
 

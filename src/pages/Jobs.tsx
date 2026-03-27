@@ -606,7 +606,7 @@ ${applicationForm.fullName || "[اسمك]"}`;
         </DialogContent>
       </Dialog>
       </div>
-    </Layout>
+    </DashboardLayout>
   );
 };
 
