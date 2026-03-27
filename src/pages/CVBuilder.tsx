@@ -290,9 +290,9 @@ const CVBuilder = () => {
   ];
 
   const [personalInfo, setPersonalInfo] = useState<PersonalInfo>({
-    fullName: initialName || user?.name || "",
+    fullName: initialName || "",
     jobTitle: initialTitle,
-    email: user?.email || "",
+    email: "",
     phone: "",
     location: "",
     website: "",

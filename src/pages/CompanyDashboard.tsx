@@ -301,8 +301,8 @@ const CompanyDashboard = () => {
   });
   const [adToDelete, setAdToDelete] = useState<string | null>(null);
   const [companyInfo, setCompanyInfo] = useState({
-    name: user?.companyName || "تيك سوليوشنز",
-    email: user?.email || "contact@techsolutions.com",
+    name: "تيك سوليوشنز",
+    email: "contact@techsolutions.com",
     phone: "0501234567",
     website: "www.techsolutions.com",
     bio: "شركة رائدة في مجال حلول البرمجيات والذكاء الاصطناعي، نسعى دائماً للابتكار وتقديم أفضل الخدمات لعملائنا.",
@@ -651,7 +651,7 @@ const CompanyDashboard = () => {
       enabled: false,
       status: "pending",
 
-      companyName: user?.companyName || "شركة تجريبية",
+      companyName: "شركة تجريبية",
       date: new Date().toISOString().split("T")[0],
       price: price,
       duration: durationLabel,

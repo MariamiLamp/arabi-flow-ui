@@ -183,7 +183,7 @@ const HRDashboard = () => {
   return (
     <DashboardLayout>
       <div className="mb-8">
-        <WelcomeCard userName={user?.name || "مسؤول الموارد البشرية"} />
+        <WelcomeCard userName="مسؤول الموارد البشرية" />
       </div>
 
       {/* Hero placement ad */}
