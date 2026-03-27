@@ -27,7 +27,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Label } from "@/components/ui/label";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
-import { GuestLayout } from "@/components/layout/GuestLayout";
+
 
 import {
   Search,
