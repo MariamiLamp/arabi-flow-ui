@@ -12,6 +12,7 @@ import {
   Building,
 } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -155,6 +156,7 @@ const companyPlans: Plan[] = [
 ];
 
 export default function Subscription() {
+  const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState<string>("js-pro");
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">(
     "monthly",
@@ -241,6 +243,22 @@ export default function Subscription() {
         <Button
           variant={isSelected ? "gradient" : "outline"}
           className="w-full h-10 text-sm font-bold"
+          onClick={(e) => {
+            e.stopPropagation();
+            if (plan.price > 0) {
+              const finalPrice = billingPeriod === "yearly" ? Math.round(plan.price * 0.8) : plan.price;
+              navigate("/checkout", {
+                state: {
+                  adRequest: {
+                    title: plan.name,
+                    price: finalPrice,
+                    duration: billingPeriod === "yearly" ? "سنوي" : "شهري",
+                    placement: "subscription",
+                  },
+                },
+              });
+            }
+          }}
         >
           {plan.price === 0 ? "ابدأ مجاناً" : "اشترك الآن"}
         </Button>
