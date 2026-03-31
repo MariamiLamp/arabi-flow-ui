@@ -243,6 +243,22 @@ export default function Subscription() {
         <Button
           variant={isSelected ? "gradient" : "outline"}
           className="w-full h-10 text-sm font-bold"
+          onClick={(e) => {
+            e.stopPropagation();
+            if (plan.price > 0) {
+              const finalPrice = billingPeriod === "yearly" ? Math.round(plan.price * 0.8) : plan.price;
+              navigate("/checkout", {
+                state: {
+                  adRequest: {
+                    title: plan.name,
+                    price: finalPrice,
+                    duration: billingPeriod === "yearly" ? "سنوي" : "شهري",
+                    placement: "subscription",
+                  },
+                },
+              });
+            }
+          }}
         >
           {plan.price === 0 ? "ابدأ مجاناً" : "اشترك الآن"}
         </Button>
