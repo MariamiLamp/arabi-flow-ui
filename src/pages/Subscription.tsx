@@ -156,6 +156,7 @@ const companyPlans: Plan[] = [
 ];
 
 export default function Subscription() {
+  const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState<string>("js-pro");
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">(
     "monthly",
