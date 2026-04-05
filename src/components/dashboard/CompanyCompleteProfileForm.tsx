@@ -106,13 +106,6 @@ export const CompanyCompleteProfileForm = ({
       icon: Shield,
       title: "المعلومات القانونية",
       description: "أضف الرقم الضريبي والمستندات القانونية",
-    },
-    {
-      id: "benefits",
-      icon: Coffee,
-      title: "المزايا والفوائد",
-      description: "أضف المزايا التي تقدمها للموظفين",
-    },
   ];
 
   const progressValue = ((currentStep + 1) / steps.length) * 100;
