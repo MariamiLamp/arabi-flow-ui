@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import {
   Dialog,
@@ -15,22 +14,21 @@ import {
 } from "@/components/ui/dialog";
 import {
   Building2,
-  Camera,
-  MapPin,
   Globe,
-  Users,
-  Calendar,
+  MapPin,
   Mail,
   Phone,
-  Plus,
-  X,
+  Calendar,
   Upload,
   Save,
   ArrowLeft,
   ArrowRight,
   CheckCircle,
-  Briefcase,
   Coffee,
+  FileText,
+  Shield,
+  X,
+  Plus,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -59,29 +57,35 @@ export const CompanyCompleteProfileForm = ({
   const [currentStep, setCurrentStep] = useState(0);
 
   const [industry, setIndustry] = useState("");
-  const [companySize, setCompanySize] = useState("");
   const [founded, setFounded] = useState("");
   const [about, setAbout] = useState("");
 
-  const [values, setValues] = useState<string[]>([]);
-  const [valueInput, setValueInput] = useState("");
+  // Legal info
+  const [taxNumber, setTaxNumber] = useState("");
+  const [commercialRegister, setCommercialRegister] = useState<File | null>(null);
+  const [taxCertificate, setTaxCertificate] = useState<File | null>(null);
+  const [otherDocs, setOtherDocs] = useState<File[]>([]);
 
-  const [techStack, setTechStack] = useState<string[]>([]);
-  const [techInput, setTechInput] = useState("");
-
+  // Benefits
   const [benefits, setBenefits] = useState<string[]>([]);
   const [benefitInput, setBenefitInput] = useState("");
 
-  const addTag = (
-    input: string,
-    setInput: (v: string) => void,
-    list: string[],
-    setList: (v: string[]) => void
-  ) => {
-    if (input.trim() && !list.includes(input.trim())) {
-      setList([...list, input.trim()]);
-      setInput("");
+  const addBenefit = () => {
+    if (benefitInput.trim() && !benefits.includes(benefitInput.trim())) {
+      setBenefits([...benefits, benefitInput.trim()]);
+      setBenefitInput("");
     }
+  };
+
+  const triggerFileUpload = (accept: string, onFile: (file: File) => void) => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = accept;
+    input.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (file) onFile(file);
+    };
+    input.click();
   };
 
   const steps = [
@@ -98,16 +102,10 @@ export const CompanyCompleteProfileForm = ({
       description: "اكتب وصفاً تفصيلياً عن شركتك",
     },
     {
-      id: "values",
-      icon: CheckCircle,
-      title: "القيم والثقافة",
-      description: "أضف قيم شركتك الأساسية",
-    },
-    {
-      id: "tech",
-      icon: Briefcase,
-      title: "التقنيات المستخدمة",
-      description: "أضف التقنيات التي يستخدمها فريقك",
+      id: "legal",
+      icon: Shield,
+      title: "المعلومات القانونية",
+      description: "أضف الرقم الضريبي والمستندات القانونية",
     },
     {
       id: "benefits",
@@ -145,21 +143,14 @@ export const CompanyCompleteProfileForm = ({
                   variant="outline"
                   size="sm"
                   className="gap-2"
-                  onClick={() => {
-                    const input = document.createElement("input");
-                    input.type = "file";
-                    input.accept = "image/*";
-                    input.onchange = (e) => {
-                      const file = (e.target as HTMLInputElement).files?.[0];
-                      if (file) {
-                        const reader = new FileReader();
-                        reader.onloadend = () =>
-                          setCompanyInfo({ ...companyInfo, logo: reader.result as string });
-                        reader.readAsDataURL(file);
-                      }
-                    };
-                    input.click();
-                  }}
+                  onClick={() =>
+                    triggerFileUpload("image/*", (file) => {
+                      const reader = new FileReader();
+                      reader.onloadend = () =>
+                        setCompanyInfo({ ...companyInfo, logo: reader.result as string });
+                      reader.readAsDataURL(file);
+                    })
+                  }
                 >
                   <Upload className="w-4 h-4" />
                   رفع الشعار
@@ -189,16 +180,12 @@ export const CompanyCompleteProfileForm = ({
                 <Input value={companyInfo.location} onChange={(e) => setCompanyInfo({ ...companyInfo, location: e.target.value })} />
               </div>
               <div className="space-y-2">
-                <Label className="flex items-center gap-1.5"><Users className="w-3.5 h-3.5" />حجم الشركة</Label>
-                <Input placeholder="200-500 موظف" value={companySize} onChange={(e) => setCompanySize(e.target.value)} />
-              </div>
-              <div className="space-y-2">
                 <Label>القطاع</Label>
                 <Input placeholder="تكنولوجيا المعلومات" value={industry} onChange={(e) => setIndustry(e.target.value)} />
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2 sm:col-span-2">
                 <Label className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />سنة التأسيس</Label>
-                <Input placeholder="2015" value={founded} onChange={(e) => setFounded(e.target.value)} dir="ltr" className="text-left" />
+                <Input placeholder="2015" value={founded} onChange={(e) => setFounded(e.target.value)} dir="ltr" className="text-left max-w-[200px]" />
               </div>
             </div>
           </div>
@@ -227,30 +214,124 @@ export const CompanyCompleteProfileForm = ({
 
       case 2:
         return (
-          <div className="space-y-4">
-            <div className="flex gap-2">
+          <div className="space-y-5">
+            {/* Tax Number */}
+            <div className="space-y-2">
+              <Label className="flex items-center gap-1.5 font-medium">
+                <Shield className="w-4 h-4 text-primary" />
+                الرقم الضريبي
+              </Label>
               <Input
-                placeholder="أضف قيمة مثل: الابتكار، العمل الجماعي..."
-                value={valueInput}
-                onChange={(e) => setValueInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addTag(valueInput, setValueInput, values, setValues))}
+                placeholder="أدخل الرقم الضريبي للشركة"
+                value={taxNumber}
+                onChange={(e) => setTaxNumber(e.target.value)}
+                dir="ltr"
+                className="text-left"
               />
-              <Button variant="outline" size="icon" onClick={() => addTag(valueInput, setValueInput, values, setValues)}>
+              <p className="text-xs text-muted-foreground">رقم التسجيل الضريبي (VAT) الخاص بالشركة</p>
+            </div>
+
+            {/* Commercial Register */}
+            <div className="space-y-2">
+              <Label className="flex items-center gap-1.5 font-medium">
+                <FileText className="w-4 h-4 text-primary" />
+                السجل التجاري
+              </Label>
+              <div
+                className="border-2 border-dashed border-border rounded-xl p-5 text-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-colors"
+                onClick={() => triggerFileUpload(".pdf,.jpg,.jpeg,.png", (file) => setCommercialRegister(file))}
+              >
+                {commercialRegister ? (
+                  <div className="flex items-center justify-center gap-3">
+                    <FileText className="w-5 h-5 text-primary" />
+                    <div>
+                      <p className="font-medium text-foreground text-sm">{commercialRegister.name}</p>
+                      <p className="text-xs text-muted-foreground">{(commercialRegister.size / 1024).toFixed(0)} KB</p>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={(e) => { e.stopPropagation(); setCommercialRegister(null); }}
+                    >
+                      <X className="w-4 h-4" />
+                    </Button>
+                  </div>
+                ) : (
+                  <div>
+                    <Upload className="w-6 h-6 text-muted-foreground mx-auto mb-2" />
+                    <p className="text-sm text-foreground font-medium">ارفع نسخة من السجل التجاري</p>
+                    <p className="text-xs text-muted-foreground mt-1">PDF, JPG, PNG — حد أقصى 5MB</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Tax Certificate */}
+            <div className="space-y-2">
+              <Label className="flex items-center gap-1.5 font-medium">
+                <FileText className="w-4 h-4 text-primary" />
+                شهادة الضريبة
+              </Label>
+              <div
+                className="border-2 border-dashed border-border rounded-xl p-5 text-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-colors"
+                onClick={() => triggerFileUpload(".pdf,.jpg,.jpeg,.png", (file) => setTaxCertificate(file))}
+              >
+                {taxCertificate ? (
+                  <div className="flex items-center justify-center gap-3">
+                    <FileText className="w-5 h-5 text-primary" />
+                    <div>
+                      <p className="font-medium text-foreground text-sm">{taxCertificate.name}</p>
+                      <p className="text-xs text-muted-foreground">{(taxCertificate.size / 1024).toFixed(0)} KB</p>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={(e) => { e.stopPropagation(); setTaxCertificate(null); }}
+                    >
+                      <X className="w-4 h-4" />
+                    </Button>
+                  </div>
+                ) : (
+                  <div>
+                    <Upload className="w-6 h-6 text-muted-foreground mx-auto mb-2" />
+                    <p className="text-sm text-foreground font-medium">ارفع شهادة التسجيل الضريبي</p>
+                    <p className="text-xs text-muted-foreground mt-1">PDF, JPG, PNG — حد أقصى 5MB</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Other Legal Documents */}
+            <div className="space-y-2">
+              <Label className="flex items-center gap-1.5 font-medium">
+                <FileText className="w-4 h-4 text-primary" />
+                مستندات أخرى (اختياري)
+              </Label>
+              <p className="text-xs text-muted-foreground">رخصة العمل، عقد التأسيس، أو أي مستندات قانونية أخرى</p>
+              {otherDocs.length > 0 && (
+                <div className="space-y-2">
+                  {otherDocs.map((doc, idx) => (
+                    <div key={idx} className="flex items-center gap-3 p-3 rounded-lg border border-border bg-muted/30">
+                      <FileText className="w-4 h-4 text-primary shrink-0" />
+                      <span className="text-sm text-foreground flex-1">{doc.name}</span>
+                      <span className="text-xs text-muted-foreground">{(doc.size / 1024).toFixed(0)} KB</span>
+                      <Button variant="ghost" size="sm" onClick={() => setOtherDocs(otherDocs.filter((_, i) => i !== idx))}>
+                        <X className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <Button
+                variant="outline"
+                size="sm"
+                className="gap-2"
+                onClick={() => triggerFileUpload(".pdf,.jpg,.jpeg,.png,.doc,.docx", (file) => setOtherDocs([...otherDocs, file]))}
+              >
                 <Plus className="w-4 h-4" />
+                إضافة مستند
               </Button>
             </div>
-            {values.length > 0 ? (
-              <div className="flex flex-wrap gap-2">
-                {values.map((v) => (
-                  <Badge key={v} variant="outline" className="gap-1.5 px-3 py-1.5 border-primary/30 text-primary">
-                    <button onClick={() => setValues(values.filter((x) => x !== v))}><X className="w-3 h-3" /></button>
-                    {v}
-                  </Badge>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-muted-foreground text-center py-6">لم تُضف أي قيم بعد</p>
-            )}
           </div>
         );
 
@@ -259,41 +340,12 @@ export const CompanyCompleteProfileForm = ({
           <div className="space-y-4">
             <div className="flex gap-2">
               <Input
-                placeholder="أضف تقنية مثل: React, Python, AWS..."
-                value={techInput}
-                onChange={(e) => setTechInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addTag(techInput, setTechInput, techStack, setTechStack))}
-              />
-              <Button variant="outline" size="icon" onClick={() => addTag(techInput, setTechInput, techStack, setTechStack)}>
-                <Plus className="w-4 h-4" />
-              </Button>
-            </div>
-            {techStack.length > 0 ? (
-              <div className="flex flex-wrap gap-2">
-                {techStack.map((t) => (
-                  <Badge key={t} variant="secondary" className="gap-1.5 px-3 py-1.5">
-                    <button onClick={() => setTechStack(techStack.filter((x) => x !== t))}><X className="w-3 h-3" /></button>
-                    {t}
-                  </Badge>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-muted-foreground text-center py-6">لم تُضف أي تقنيات بعد</p>
-            )}
-          </div>
-        );
-
-      case 4:
-        return (
-          <div className="space-y-4">
-            <div className="flex gap-2">
-              <Input
                 placeholder="أضف ميزة مثل: تأمين صحي، عمل عن بُعد..."
                 value={benefitInput}
                 onChange={(e) => setBenefitInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addTag(benefitInput, setBenefitInput, benefits, setBenefits))}
+                onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addBenefit())}
               />
-              <Button variant="outline" size="icon" onClick={() => addTag(benefitInput, setBenefitInput, benefits, setBenefits)}>
+              <Button variant="outline" size="icon" onClick={addBenefit}>
                 <Plus className="w-4 h-4" />
               </Button>
             </div>
