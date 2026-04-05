@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { CompanyCompleteProfileForm } from "@/components/dashboard/CompanyCompleteProfileForm";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -30,6 +31,7 @@ import {
   Baby,
   Plane,
   Camera,
+  ArrowLeft,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -49,6 +51,7 @@ interface CompanyProfileTabProps {
 const CompanyProfileTab = ({ companyInfo, setCompanyInfo }: CompanyProfileTabProps) => {
   const { toast } = useToast();
   const [isEditing, setIsEditing] = useState(false);
+  const [isCompleteFormOpen, setIsCompleteFormOpen] = useState(false);
 
   // Extended profile data
   const [industry, setIndustry] = useState("تكنولوجيا المعلومات");
@@ -147,8 +150,19 @@ const CompanyProfileTab = ({ companyInfo, setCompanyInfo }: CompanyProfileTabPro
                 </Badge>
               ))}
           </div>
+          <Button size="sm" className="gap-2 mt-4" onClick={() => setIsCompleteFormOpen(true)}>
+            إكمال ملف الشركة
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
         </div>
       )}
+
+      <CompanyCompleteProfileForm
+        open={isCompleteFormOpen}
+        onOpenChange={setIsCompleteFormOpen}
+        companyInfo={companyInfo}
+        setCompanyInfo={setCompanyInfo}
+      />
 
       {/* Company Header Card */}
       <Card>
