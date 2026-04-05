@@ -83,6 +83,8 @@ import { CompanyDashboardLayout } from "@/components/layout/CompanyDashboardLayo
 import { AdPlacementSelector } from "@/components/dashboard/AdPlacementSelector";
 import { StatCard } from "@/components/dashboard/StatCard";
 import JobForm, { JobFormData } from "@/components/dashboard/JobForm";
+import CompanyProfileTab from "@/components/dashboard/CompanyProfileTab";
+import CompanySettingsTab from "@/components/dashboard/CompanySettingsTab";
 
 // Mock data
 const initialJobs = [
@@ -2248,7 +2250,10 @@ const CompanyDashboard = () => {
         {activeTab === "promotion" && renderPromotion()}
         {activeTab === "ads" && renderAds()}
         {activeTab === "subscription" && renderSubscription()}
-        {activeTab === "settings" && renderSettings()}
+        {activeTab === "profile" && (
+          <CompanyProfileTab companyInfo={companyInfo} setCompanyInfo={setCompanyInfo} />
+        )}
+        {activeTab === "settings" && <CompanySettingsTab />}
 
         {/* Edit Job Dialog */}
         <Dialog open={isEditJobOpen} onOpenChange={setIsEditJobOpen}>

@@ -6,6 +6,7 @@ import {
   Megaphone,
   ChevronLeft,
   ChevronRight,
+  User,
   ChevronDown,
   LogOut,
   Building2,
@@ -27,6 +28,7 @@ const navGroups = [
     items: [
       { icon: Briefcase, label: "الوظائف", value: "jobs" },
       { icon: FileText, label: "الطلبات", value: "applications" },
+      { icon: User, label: "الملف الشخصي", value: "profile" },
       { icon: CreditCard, label: "الاشتراكات", value: "subscription" },
     ],
   },
