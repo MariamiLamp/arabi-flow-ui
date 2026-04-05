@@ -40,7 +40,7 @@ export const CompleteProfileBanner = ({ completionPercentage = 30 }: CompletePro
         ))}
       </div>
 
-      <Link to="/settings">
+      <Link to="/candidate/1">
         <Button size="sm" className="gap-2">
           إكمال الملف الشخصي
           <ArrowLeft className="w-4 h-4" />

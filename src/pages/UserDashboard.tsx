@@ -1,6 +1,6 @@
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { WelcomeCard } from "@/components/dashboard/WelcomeCard";
-import { CompleteProfileBanner } from "@/components/dashboard/CompleteProfileBanner";
+
 import { StatCard } from "@/components/dashboard/StatCard";
 import { QuickActions } from "@/components/dashboard/QuickActions";
 import { JobCard } from "@/components/dashboard/JobCard";
@@ -87,9 +87,8 @@ const UserDashboard = () => {
   return (
     <DashboardLayout>
       {/* Welcome Section */}
-      <div className="mb-8 space-y-4">
+      <div className="mb-8">
         <WelcomeCard userName="أحمد محمد" />
-        <CompleteProfileBanner completionPercentage={30} />
       </div>
 
       {/* Hero placement ad */}
