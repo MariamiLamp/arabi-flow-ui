@@ -23,6 +23,7 @@ import {
   Save,
   ArrowLeft,
   ArrowRight,
+  CheckCircle,
   Coffee,
   FileText,
   Shield,
