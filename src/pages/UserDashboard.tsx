@@ -87,8 +87,9 @@ const UserDashboard = () => {
   return (
     <DashboardLayout>
       {/* Welcome Section */}
-      <div className="mb-8">
+      <div className="mb-8 space-y-4">
         <WelcomeCard userName="أحمد محمد" />
+        <CompleteProfileBanner completionPercentage={30} />
       </div>
 
       {/* Hero placement ad */}
