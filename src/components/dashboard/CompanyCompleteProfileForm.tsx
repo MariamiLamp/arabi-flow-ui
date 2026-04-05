@@ -329,37 +329,6 @@ export const CompanyCompleteProfileForm = ({
           </div>
         );
 
-      case 3:
-        return (
-          <div className="space-y-4">
-            <div className="flex gap-2">
-              <Input
-                placeholder="أضف ميزة مثل: تأمين صحي، عمل عن بُعد..."
-                value={benefitInput}
-                onChange={(e) => setBenefitInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addBenefit())}
-              />
-              <Button variant="outline" size="icon" onClick={addBenefit}>
-                <Plus className="w-4 h-4" />
-              </Button>
-            </div>
-            {benefits.length > 0 ? (
-              <div className="grid sm:grid-cols-2 gap-2">
-                {benefits.map((b) => (
-                  <div key={b} className="flex items-center gap-3 p-3 rounded-xl bg-primary/5 border border-primary/10">
-                    <CheckCircle className="w-4 h-4 text-primary shrink-0" />
-                    <span className="text-sm font-medium text-foreground flex-1">{b}</span>
-                    <button onClick={() => setBenefits(benefits.filter((x) => x !== b))}>
-                      <X className="w-4 h-4 text-muted-foreground hover:text-destructive" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-muted-foreground text-center py-6">لم تُضف أي مزايا بعد</p>
-            )}
-          </div>
-        );
 
       default:
         return null;
