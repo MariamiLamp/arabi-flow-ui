@@ -224,10 +224,6 @@ const CompanyProfileTab = ({ companyInfo, setCompanyInfo }: CompanyProfileTabPro
                     <Input value={industry} onChange={(e) => setIndustry(e.target.value)} />
                   </div>
                   <div className="space-y-2">
-                    <Label>حجم الشركة</Label>
-                    <Input value={companySize} onChange={(e) => setCompanySize(e.target.value)} />
-                  </div>
-                  <div className="space-y-2">
                     <Label>سنة التأسيس</Label>
                     <Input value={founded} onChange={(e) => setFounded(e.target.value)} dir="ltr" className="text-left" />
                   </div>
@@ -240,7 +236,6 @@ const CompanyProfileTab = ({ companyInfo, setCompanyInfo }: CompanyProfileTabPro
                   </div>
                   <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                     <span className="flex items-center gap-1"><MapPin className="w-4 h-4" />{companyInfo.location}</span>
-                    <span className="flex items-center gap-1"><Users className="w-4 h-4" />{companySize}</span>
                     <span className="flex items-center gap-1"><Calendar className="w-4 h-4" />تأسست {founded}</span>
                     <span className="flex items-center gap-1"><Globe className="w-4 h-4" />{companyInfo.website}</span>
                     <span className="flex items-center gap-1"><Mail className="w-4 h-4" />{companyInfo.email}</span>
@@ -297,119 +292,6 @@ const CompanyProfileTab = ({ companyInfo, setCompanyInfo }: CompanyProfileTabPro
         </CardContent>
       </Card>
 
-      {/* Values */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-lg">
-            <CheckCircle className="w-5 h-5 text-primary" />
-            قيم الشركة
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          {isEditing && (
-            <div className="flex gap-2">
-              <Input
-                placeholder="أضف قيمة..."
-                value={valueInput}
-                onChange={(e) => setValueInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addTag(valueInput, setValueInput, values, setValues))}
-              />
-              <Button variant="outline" size="icon" onClick={() => addTag(valueInput, setValueInput, values, setValues)}>
-                <Plus className="w-4 h-4" />
-              </Button>
-            </div>
-          )}
-          <div className="flex flex-wrap gap-2">
-            {values.map((v) => (
-              <Badge key={v} variant="outline" className="gap-1.5 px-3 py-1.5 border-primary/30 text-primary">
-                {isEditing && (
-                  <button onClick={() => setValues(values.filter((x) => x !== v))}>
-                    <X className="w-3 h-3" />
-                  </button>
-                )}
-                {v}
-              </Badge>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Tech Stack */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-lg">
-            <Briefcase className="w-5 h-5 text-primary" />
-            التقنيات المستخدمة
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          {isEditing && (
-            <div className="flex gap-2">
-              <Input
-                placeholder="أضف تقنية..."
-                value={techInput}
-                onChange={(e) => setTechInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addTag(techInput, setTechInput, techStack, setTechStack))}
-              />
-              <Button variant="outline" size="icon" onClick={() => addTag(techInput, setTechInput, techStack, setTechStack)}>
-                <Plus className="w-4 h-4" />
-              </Button>
-            </div>
-          )}
-          <div className="flex flex-wrap gap-2">
-            {techStack.map((t) => (
-              <Badge key={t} variant="secondary" className="gap-1.5 px-3 py-1.5">
-                {isEditing && (
-                  <button onClick={() => setTechStack(techStack.filter((x) => x !== t))}>
-                    <X className="w-3 h-3" />
-                  </button>
-                )}
-                {t}
-              </Badge>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Benefits */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-lg">
-            <Coffee className="w-5 h-5 text-primary" />
-            المزايا والفوائد
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          {isEditing && (
-            <div className="flex gap-2">
-              <Input
-                placeholder="أضف ميزة..."
-                value={benefitInput}
-                onChange={(e) => setBenefitInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addTag(benefitInput, setBenefitInput, benefits, setBenefits))}
-              />
-              <Button variant="outline" size="icon" onClick={() => addTag(benefitInput, setBenefitInput, benefits, setBenefits)}>
-                <Plus className="w-4 h-4" />
-              </Button>
-            </div>
-          )}
-          <div className="grid sm:grid-cols-2 gap-3">
-            {benefits.map((b) => (
-              <div key={b} className="flex items-center gap-3 p-3 rounded-xl bg-primary/5 border border-primary/10">
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <CheckCircle className="w-4 h-4 text-primary" />
-                </div>
-                <span className="text-sm font-medium text-foreground flex-1">{b}</span>
-                {isEditing && (
-                  <button onClick={() => setBenefits(benefits.filter((x) => x !== b))}>
-                    <X className="w-4 h-4 text-muted-foreground hover:text-destructive" />
-                  </button>
-                )}
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 };
