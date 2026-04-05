@@ -55,44 +55,20 @@ const CompanyProfileTab = ({ companyInfo, setCompanyInfo }: CompanyProfileTabPro
 
   // Extended profile data
   const [industry, setIndustry] = useState("تكنولوجيا المعلومات");
-  const [companySize, setCompanySize] = useState("200-500 موظف");
   const [founded, setFounded] = useState("2015");
   const [about, setAbout] = useState(
     "شركة رائدة في مجال الحلول التقنية والبرمجيات في المنطقة. نعمل مع أكثر من 300 عميل في مختلف القطاعات، ونفخر بفريقنا المتنوع والمبدع."
   );
 
-  // Values
-  const [values, setValues] = useState(["الابتكار والإبداع", "العمل الجماعي", "التطوير المستمر"]);
-  const [valueInput, setValueInput] = useState("");
-
-  // Tech stack
-  const [techStack, setTechStack] = useState(["React", "TypeScript", "Node.js", "Python", "AWS"]);
-  const [techInput, setTechInput] = useState("");
-
-  // Benefits
-  const [benefits, setBenefits] = useState([
-    "عمل عن بُعد مرن",
-    "برامج تدريب وتطوير",
-    "تأمين صحي شامل",
-    "بيئة عمل محفزة",
-  ]);
-  const [benefitInput, setBenefitInput] = useState("");
-
   // Profile completion
   const hasLogo = !!companyInfo.logo;
   const hasAbout = about.length > 50;
-  const hasValues = values.length >= 3;
-  const hasTech = techStack.length >= 3;
-  const hasBenefits = benefits.length >= 3;
   const hasBasicInfo = !!companyInfo.name && !!companyInfo.email && !!companyInfo.phone;
 
   const completionItems = [
     { done: hasLogo, label: "شعار الشركة" },
     { done: hasBasicInfo, label: "المعلومات الأساسية" },
     { done: hasAbout, label: "نبذة عن الشركة" },
-    { done: hasValues, label: "قيم الشركة" },
-    { done: hasTech, label: "التقنيات المستخدمة" },
-    { done: hasBenefits, label: "المزايا والفوائد" },
   ];
   const completionPercentage = Math.round(
     (completionItems.filter((i) => i.done).length / completionItems.length) * 100
