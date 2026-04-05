@@ -149,8 +149,19 @@ const CompanyProfileTab = ({ companyInfo, setCompanyInfo }: CompanyProfileTabPro
                 </Badge>
               ))}
           </div>
+          <Button size="sm" className="gap-2 mt-4" onClick={() => setIsCompleteFormOpen(true)}>
+            إكمال ملف الشركة
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
         </div>
       )}
+
+      <CompanyCompleteProfileForm
+        open={isCompleteFormOpen}
+        onOpenChange={setIsCompleteFormOpen}
+        companyInfo={companyInfo}
+        setCompanyInfo={setCompanyInfo}
+      />
 
       {/* Company Header Card */}
       <Card>
