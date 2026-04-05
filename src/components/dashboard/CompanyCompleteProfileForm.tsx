@@ -23,7 +23,6 @@ import {
   Save,
   ArrowLeft,
   ArrowRight,
-  CheckCircle,
   Coffee,
   FileText,
   Shield,
@@ -66,16 +65,6 @@ export const CompanyCompleteProfileForm = ({
   const [taxCertificate, setTaxCertificate] = useState<File | null>(null);
   const [otherDocs, setOtherDocs] = useState<File[]>([]);
 
-  // Benefits
-  const [benefits, setBenefits] = useState<string[]>([]);
-  const [benefitInput, setBenefitInput] = useState("");
-
-  const addBenefit = () => {
-    if (benefitInput.trim() && !benefits.includes(benefitInput.trim())) {
-      setBenefits([...benefits, benefitInput.trim()]);
-      setBenefitInput("");
-    }
-  };
 
   const triggerFileUpload = (accept: string, onFile: (file: File) => void) => {
     const input = document.createElement("input");
