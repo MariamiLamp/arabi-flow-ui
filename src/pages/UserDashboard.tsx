@@ -1,5 +1,6 @@
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { WelcomeCard } from "@/components/dashboard/WelcomeCard";
+import { CompleteProfileBanner } from "@/components/dashboard/CompleteProfileBanner";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { QuickActions } from "@/components/dashboard/QuickActions";
 import { JobCard } from "@/components/dashboard/JobCard";
