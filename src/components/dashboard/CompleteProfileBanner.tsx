@@ -1,13 +1,13 @@
 import { AlertCircle, ArrowLeft, Camera, FileText, Briefcase, Languages } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Link } from "react-router-dom";
 
 interface CompleteProfileBannerProps {
   completionPercentage?: number;
+  onStartComplete?: () => void;
 }
 
-export const CompleteProfileBanner = ({ completionPercentage = 30 }: CompleteProfileBannerProps) => {
+export const CompleteProfileBanner = ({ completionPercentage = 30, onStartComplete }: CompleteProfileBannerProps) => {
   const missingItems = [
     { icon: Camera, label: "صورة شخصية" },
     { icon: FileText, label: "السيرة الذاتية" },
@@ -40,12 +40,10 @@ export const CompleteProfileBanner = ({ completionPercentage = 30 }: CompletePro
         ))}
       </div>
 
-      <Link to="/candidate/1">
-        <Button size="sm" className="gap-2">
-          إكمال الملف الشخصي
-          <ArrowLeft className="w-4 h-4" />
-        </Button>
-      </Link>
+      <Button size="sm" className="gap-2" onClick={onStartComplete}>
+        إكمال الملف الشخصي
+        <ArrowLeft className="w-4 h-4" />
+      </Button>
     </div>
   );
 };

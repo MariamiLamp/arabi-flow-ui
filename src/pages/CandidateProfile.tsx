@@ -335,6 +335,9 @@ const CandidateProfile = () => {
 
   const candidate = candidatesData.find((c) => c.id === Number(id));
 
+  // Complete Profile Dialog
+  const [isProfileFormOpen, setIsProfileFormOpen] = useState(false);
+
   // Cover Letter Generator State
   const [isCoverLetterDialogOpen, setIsCoverLetterDialogOpen] = useState(false);
   const [coverLetterForm, setCoverLetterForm] = useState({
@@ -426,8 +429,8 @@ ${candidate.phone}`;
         {/* Complete Profile Banner & Form - only for own profile */}
         {!isCompanyView && (
           <>
-            <CompleteProfileBanner completionPercentage={30} />
-            <CompleteProfileForm />
+            <CompleteProfileBanner completionPercentage={30} onStartComplete={() => setIsProfileFormOpen(true)} />
+            <CompleteProfileForm open={isProfileFormOpen} onOpenChange={setIsProfileFormOpen} />
           </>
         )}
 
