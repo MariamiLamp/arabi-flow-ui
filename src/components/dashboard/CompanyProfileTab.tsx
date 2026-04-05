@@ -74,17 +74,6 @@ const CompanyProfileTab = ({ companyInfo, setCompanyInfo }: CompanyProfileTabPro
     (completionItems.filter((i) => i.done).length / completionItems.length) * 100
   );
 
-  const addTag = (
-    input: string,
-    setInput: (v: string) => void,
-    list: string[],
-    setList: (v: string[]) => void
-  ) => {
-    if (input.trim() && !list.includes(input.trim())) {
-      setList([...list, input.trim()]);
-      setInput("");
-    }
-  };
 
   const handleSave = () => {
     setIsEditing(false);
