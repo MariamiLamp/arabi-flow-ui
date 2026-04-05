@@ -50,6 +50,7 @@ import { useToast } from "@/hooks/use-toast";
 
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { CompleteProfileBanner } from "@/components/dashboard/CompleteProfileBanner";
+import { CompleteProfileForm } from "@/components/dashboard/CompleteProfileForm";
 
 // Mock candidates data (should be shared or fetched from API)
 const candidatesData = [
@@ -422,9 +423,12 @@ ${candidate.phone}`;
   return (
     <DashboardLayout>
       <main className="p-6 space-y-6">
-        {/* Complete Profile Banner - only for own profile */}
+        {/* Complete Profile Banner & Form - only for own profile */}
         {!isCompanyView && (
-          <CompleteProfileBanner completionPercentage={30} />
+          <>
+            <CompleteProfileBanner completionPercentage={30} />
+            <CompleteProfileForm />
+          </>
         )}
 
         {/* Profile Header */}
