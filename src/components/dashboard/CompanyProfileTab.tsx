@@ -31,6 +31,7 @@ import {
   Baby,
   Plane,
   Camera,
+  ArrowLeft,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
