@@ -24,7 +24,6 @@ import {
   ArrowLeft,
   ArrowRight,
   CheckCircle,
-  Coffee,
   FileText,
   Shield,
   X,
