@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { CompanyCompleteProfileForm } from "@/components/dashboard/CompanyCompleteProfileForm";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -49,6 +50,7 @@ interface CompanyProfileTabProps {
 const CompanyProfileTab = ({ companyInfo, setCompanyInfo }: CompanyProfileTabProps) => {
   const { toast } = useToast();
   const [isEditing, setIsEditing] = useState(false);
+  const [isCompleteFormOpen, setIsCompleteFormOpen] = useState(false);
 
   // Extended profile data
   const [industry, setIndustry] = useState("تكنولوجيا المعلومات");
