@@ -1239,6 +1239,7 @@ export const FinancialReports: React.FC<FinancialReportsProps> = ({
                     <TableHead className="text-center font-black text-secondary text-xs md:text-sm py-4">
                       تاريخ النهاية
                     </TableHead>
+                  </TableRow>
                 </TableHeader>
                 <TableBody>
                   {SUBSCRIPTION_PLANS.map((plan, index) => (
@@ -1268,6 +1269,8 @@ export const FinancialReports: React.FC<FinancialReportsProps> = ({
                       <TableCell className="text-center text-xs md:text-sm text-muted-foreground py-4">
                         {plan.endDate || "—"}
                       </TableCell>
+                    </TableRow>
+                  ))}
                   <TableRow className="bg-primary/5 font-black border-t-2 border-primary/30">
                     <TableCell colSpan={2} className="text-right text-sm py-5 text-primary">
                       الإجمالي ({SUBSCRIPTION_PLANS.length} خطة)
