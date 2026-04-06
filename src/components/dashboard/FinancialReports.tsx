@@ -22,6 +22,9 @@ import {
   Building2,
   Briefcase,
   DollarSign,
+  ChevronLeft,
+  ChevronRight,
+  Calendar,
 } from "lucide-react";
 import {
   ResponsiveContainer,
