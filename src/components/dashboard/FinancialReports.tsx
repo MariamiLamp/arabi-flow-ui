@@ -146,6 +146,30 @@ const SUBSCRIPTION_PLANS = [
   { name: "A-Plane 9", price: 90, role: "إعلان", startDate: "", endDate: "" },
   { name: "A-Plane 10", price: 100, role: "إعلان", startDate: "", endDate: "" },
   { name: "T-A", price: 1, role: "قالب", startDate: "", endDate: "" },
+  { name: "T-B", price: 2, role: "قالب", startDate: "", endDate: "" },
+  { name: "T-C", price: 3, role: "قالب", startDate: "", endDate: "" },
+  { name: "T-D", price: 4, role: "قالب", startDate: "", endDate: "" },
+  { name: "T-E", price: 5, role: "قالب", startDate: "", endDate: "" },
+  { name: "T-F", price: 6, role: "قالب", startDate: "", endDate: "" },
+  { name: "T-G", price: 7, role: "قالب", startDate: "", endDate: "" },
+  { name: "T-H", price: 8, role: "قالب", startDate: "", endDate: "" },
+  { name: "T-I", price: 9, role: "قالب", startDate: "", endDate: "" },
+  { name: "T-J", price: 10, role: "قالب", startDate: "", endDate: "" },
+];
+
+const SALES_INVOICES = [
+  { docType: 5, taxType: 1, goodsType: 0, invoiceNo: 1, customer: "A", taxRegNo: "", address: "Z", date: "12/31/21", product: "J-Plane 1", unitPrice: 100, taxCategory: 14, qty: 1, totalAmount: 100, discount: 0, netAmount: 100, taxValue: 14, grandTotal: 114 },
+  { docType: 5, taxType: 1, goodsType: 0, invoiceNo: 2, customer: "B", taxRegNo: "", address: "U", date: "12/31/21", product: "J-Plane 3", unitPrice: 300, taxCategory: 14, qty: 1, totalAmount: 300, discount: 0, netAmount: 300, taxValue: 42, grandTotal: 342 },
+  { docType: 5, taxType: 1, goodsType: 0, invoiceNo: 3, customer: "C", taxRegNo: "", address: "O", date: "1/4/22", product: "J-Plane 6", unitPrice: 600, taxCategory: 14, qty: 1, totalAmount: 600, discount: 0, netAmount: 600, taxValue: 84, grandTotal: 684 },
+  { docType: 5, taxType: 1, goodsType: 0, invoiceNo: 4, customer: "D", taxRegNo: "", address: "M", date: "1/4/22", product: "J-Plane 9", unitPrice: 900, taxCategory: 14, qty: 1, totalAmount: 900, discount: 0, netAmount: 900, taxValue: 126, grandTotal: 1026 },
+  { docType: 5, taxType: 1, goodsType: 0, invoiceNo: 5, customer: "J", taxRegNo: "", address: "O", date: "1/1/22", product: "C-Plane 2", unitPrice: 2000, taxCategory: 14, qty: 1, totalAmount: 2000, discount: 0, netAmount: 2000, taxValue: 280, grandTotal: 2280 },
+  { docType: 1, taxType: 1, goodsType: 0, invoiceNo: 6, customer: "AAA", taxRegNo: "123456789", address: "DDD", date: "1/1/22", product: "Co-Plane 1", unitPrice: 500, taxCategory: 14, qty: 1, totalAmount: 500, discount: 0, netAmount: 500, taxValue: 70, grandTotal: 570 },
+  { docType: 1, taxType: 1, goodsType: 0, invoiceNo: 7, customer: "BBB", taxRegNo: "987654321", address: "QQQ", date: "1/3/22", product: "A-Plane 5", unitPrice: 50, taxCategory: 14, qty: 1, totalAmount: 50, discount: 0, netAmount: 50, taxValue: 7, grandTotal: 57 },
+  { docType: 5, taxType: 1, goodsType: 0, invoiceNo: 8, customer: "E", taxRegNo: "", address: "R", date: "1/4/22", product: "J-Plane 7", unitPrice: 700, taxCategory: 14, qty: 1, totalAmount: 700, discount: 0, netAmount: 700, taxValue: 98, grandTotal: 798 },
+  { docType: 5, taxType: 1, goodsType: 0, invoiceNo: 9, customer: "F", taxRegNo: "", address: "N", date: "1/4/22", product: "J-Plane 2", unitPrice: 200, taxCategory: 14, qty: 1, totalAmount: 200, discount: 0, netAmount: 200, taxValue: 28, grandTotal: 228 },
+  { docType: 5, taxType: 1, goodsType: 0, invoiceNo: 10, customer: "Z", taxRegNo: "", address: "P", date: "1/4/22", product: "T-G", unitPrice: 7, taxCategory: 14, qty: 1, totalAmount: 7, discount: 0, netAmount: 7, taxValue: 0.98, grandTotal: 7.98 },
+  { docType: 5, taxType: 1, goodsType: 0, invoiceNo: 11, customer: "G", taxRegNo: "", address: "Q", date: "1/4/22", product: "J-Plane 2", unitPrice: 200, taxCategory: 14, qty: 1, totalAmount: 200, discount: 0, netAmount: 200, taxValue: 28, grandTotal: 228 },
+  { docType: 5, taxType: 1, goodsType: 0, invoiceNo: 12, customer: "1", taxRegNo: "", address: "F", date: "2/4/22", product: "J-Plane 2", unitPrice: 200, taxCategory: 14, qty: 1, totalAmount: 200, discount: 0, netAmount: 200, taxValue: 28, grandTotal: 228 },
 ];
 
 export const FinancialReports: React.FC<FinancialReportsProps> = ({
@@ -300,6 +324,10 @@ export const FinancialReports: React.FC<FinancialReportsProps> = ({
           <TabsTrigger value="subscription_plans" className="gap-2">
             <CreditCard className="w-4 h-4" />
             خطط الاشتراكات
+          </TabsTrigger>
+          <TabsTrigger value="sales_invoices" className="gap-2">
+            <FileText className="w-4 h-4" />
+            فواتير المبيعات
           </TabsTrigger>
           <TabsTrigger value="monthly_table" className="gap-2">
             <FileText className="w-4 h-4" />
