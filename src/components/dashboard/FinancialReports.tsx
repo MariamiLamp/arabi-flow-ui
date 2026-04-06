@@ -113,6 +113,41 @@ const REVENUE_OVERVIEW_DATA: Record<
   },
 };
 
+const SUBSCRIPTION_PLANS = [
+  { name: "J-Plane 1", price: 100, role: "باحث عن عمل" },
+  { name: "J-Plane 2", price: 200, role: "باحث عن عمل" },
+  { name: "J-Plane 3", price: 300, role: "باحث عن عمل" },
+  { name: "J-Plane 4", price: 400, role: "باحث عن عمل" },
+  { name: "J-Plane 5", price: 500, role: "باحث عن عمل" },
+  { name: "J-Plane 6", price: 600, role: "باحث عن عمل" },
+  { name: "J-Plane 7", price: 700, role: "باحث عن عمل" },
+  { name: "J-Plane 8", price: 800, role: "باحث عن عمل" },
+  { name: "J-Plane 9", price: 900, role: "باحث عن عمل" },
+  { name: "J-Plane 10", price: 1000, role: "باحث عن عمل" },
+  { name: "C-Plane 1", price: 1000, role: "شركة" },
+  { name: "C-Plane 2", price: 2000, role: "شركة" },
+  { name: "C-Plane 4", price: 4000, role: "شركة" },
+  { name: "C-Plane 5", price: 5000, role: "شركة" },
+  { name: "C-Plane 6", price: 6000, role: "شركة" },
+  { name: "C-Plane 7", price: 7000, role: "شركة" },
+  { name: "C-Plane 8", price: 8000, role: "شركة" },
+  { name: "C-Plane 9", price: 9000, role: "شركة" },
+  { name: "C-Plane 10", price: 10000, role: "شركة" },
+  { name: "Co-Plane 1", price: 500, role: "كاتب سيرة ذاتية" },
+  { name: "Co-Plane 2", price: 6000, role: "كاتب سيرة ذاتية" },
+  { name: "A-Plane 1", price: 10, role: "إعلان" },
+  { name: "A-Plane 2", price: 20, role: "إعلان" },
+  { name: "A-Plane 3", price: 30, role: "إعلان" },
+  { name: "A-Plane 4", price: 40, role: "إعلان" },
+  { name: "A-Plane 5", price: 50, role: "إعلان" },
+  { name: "A-Plane 6", price: 60, role: "إعلان" },
+  { name: "A-Plane 7", price: 70, role: "إعلان" },
+  { name: "A-Plane 8", price: 80, role: "إعلان" },
+  { name: "A-Plane 9", price: 90, role: "إعلان" },
+  { name: "A-Plane 10", price: 100, role: "إعلان" },
+  { name: "T-A", price: 1, role: "قالب" },
+];
+
 export const FinancialReports: React.FC<FinancialReportsProps> = ({
   payments,
   revenueByMonth,
@@ -261,6 +296,10 @@ export const FinancialReports: React.FC<FinancialReportsProps> = ({
           <TabsTrigger value="templates_pay" className="gap-2">
             <LayoutTemplate className="w-4 h-4" />
             دفعات القوالب
+          </TabsTrigger>
+          <TabsTrigger value="subscription_plans" className="gap-2">
+            <CreditCard className="w-4 h-4" />
+            خطط الاشتراكات
           </TabsTrigger>
           <TabsTrigger value="monthly_table" className="gap-2">
             <FileText className="w-4 h-4" />
@@ -1159,6 +1198,80 @@ export const FinancialReports: React.FC<FinancialReportsProps> = ({
               </Card>
             )}
           </div>
+        </TabsContent>
+
+        <TabsContent value="subscription_plans" className="w-full">
+          <Card className="card-elevated overflow-hidden border-none shadow-2xl bg-card w-full">
+            <CardHeader className="bg-secondary text-white p-4 md:p-6 border-b-4 border-primary">
+              <div className="flex items-center justify-between gap-4">
+                <div className="bg-primary/20 p-2 rounded-lg shrink-0">
+                  <CreditCard className="w-5 h-5 md:w-6 md:h-6 text-primary-light" />
+                </div>
+                <div className="text-right flex-1 min-w-0">
+                  <CardTitle className="text-base md:text-xl font-black tracking-tight truncate">
+                    خطط الاشتراكات والأسعار
+                  </CardTitle>
+                  <p className="text-[10px] md:text-xs text-secondary-foreground/60 mt-0.5 md:mt-1 font-medium truncate">
+                    جميع خطط الاشتراكات مع الأسعار الشهرية ودور المستخدم
+                  </p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="p-0">
+              <Table dir="rtl">
+                <TableHeader>
+                  <TableRow className="bg-secondary/5 border-b border-border/50">
+                    <TableHead className="text-right font-black text-secondary text-xs md:text-sm py-4 w-[60px]">
+                      #
+                    </TableHead>
+                    <TableHead className="text-right font-black text-secondary text-xs md:text-sm py-4">
+                      الاشتراك
+                    </TableHead>
+                    <TableHead className="text-center font-black text-secondary text-xs md:text-sm py-4">
+                      السعر / شهر
+                    </TableHead>
+                    <TableHead className="text-center font-black text-secondary text-xs md:text-sm py-4">
+                      دور المستخدم
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {SUBSCRIPTION_PLANS.map((plan, index) => (
+                    <TableRow key={plan.name} className="hover:bg-primary/10 transition-colors border-b border-border/30">
+                      <TableCell className="text-right text-xs md:text-sm text-muted-foreground py-4">
+                        {index + 1}
+                      </TableCell>
+                      <TableCell className="font-bold text-foreground text-xs md:text-sm py-4">
+                        {plan.name}
+                      </TableCell>
+                      <TableCell className="text-center font-black text-primary text-xs md:text-sm py-4">
+                        {plan.price.toLocaleString()} ر.س
+                      </TableCell>
+                      <TableCell className="text-center py-4">
+                        <Badge variant={
+                          plan.role === "باحث عن عمل" ? "default" :
+                          plan.role === "شركة" ? "secondary" :
+                          plan.role === "كاتب سيرة ذاتية" ? "outline" :
+                          plan.role === "إعلان" ? "destructive" : "default"
+                        } className="text-[10px] md:text-xs">
+                          {plan.role}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                  <TableRow className="bg-primary/5 font-black border-t-2 border-primary/30">
+                    <TableCell colSpan={2} className="text-right text-sm py-5 text-primary">
+                      الإجمالي ({SUBSCRIPTION_PLANS.length} خطة)
+                    </TableCell>
+                    <TableCell className="text-center text-sm py-5 text-primary font-black">
+                      {SUBSCRIPTION_PLANS.reduce((sum, p) => sum + p.price, 0).toLocaleString()} ر.س
+                    </TableCell>
+                    <TableCell />
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
