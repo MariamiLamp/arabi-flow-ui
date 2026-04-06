@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -256,6 +256,10 @@ export const FinancialReports: React.FC<FinancialReportsProps> = ({
             <LayoutTemplate className="w-4 h-4" />
             دفعات القوالب
           </TabsTrigger>
+          <TabsTrigger value="monthly_table" className="gap-2">
+            <FileText className="w-4 h-4" />
+            الجدول الشهري
+          </TabsTrigger>
           <TabsTrigger value="revenue_overview" className="gap-2">
             <FileText className="w-4 h-4" />
             نظرة عامة على الإيرادات
@@ -350,6 +354,112 @@ export const FinancialReports: React.FC<FinancialReportsProps> = ({
                         })}
                       </TableRow>
                     ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="monthly_table" className="w-full">
+          <Card className="card-elevated overflow-hidden border-none shadow-2xl bg-card w-full">
+            <CardHeader className="bg-secondary text-white p-4 md:p-6 border-b-4 border-primary">
+              <div className="flex items-center justify-between gap-4">
+                <div className="bg-primary/20 p-2 rounded-lg shrink-0">
+                  <FileText className="w-5 h-5 md:w-6 md:h-6 text-primary-light" />
+                </div>
+                <div className="text-right flex-1 min-w-0">
+                  <CardTitle className="text-base md:text-xl font-black tracking-tight truncate">
+                    الجدول الشهري (2026)
+                  </CardTitle>
+                  <p className="text-[10px] md:text-xs text-secondary-foreground/60 mt-0.5 md:mt-1 font-medium truncate">
+                    ملخص الإيرادات الشهرية حسب نوع الإيراد
+                  </p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="p-0">
+              <div className="overflow-x-auto relative scrollbar-thin scrollbar-thumb-muted-foreground/20">
+                <Table className="border-collapse min-w-[900px] w-full" dir="ltr">
+                  <TableHeader>
+                    <TableRow className="bg-secondary/5 border-b border-border/50">
+                      <TableHead className="text-center font-black text-secondary uppercase tracking-widest text-[10px] md:text-xs sticky left-0 bg-card z-30 w-[120px] md:w-[150px] border-r border-border/60 shadow-[4px_0_12px_rgba(0,0,0,0.08)] py-4 md:py-6">
+                        Month
+                      </TableHead>
+                      {REVENUE_TYPES.map((type) => (
+                        <TableHead
+                          key={type}
+                          className="text-center border-r border-border/40 font-black text-secondary text-xs md:text-sm last:border-r-0 py-3 md:py-4 bg-muted/20"
+                          colSpan={2}
+                        >
+                          {type}
+                        </TableHead>
+                      ))}
+                      <TableHead className="text-center font-black text-primary text-xs md:text-sm py-3 md:py-4 bg-primary/5" colSpan={2}>
+                        Total
+                      </TableHead>
+                    </TableRow>
+                    <TableRow className="bg-card border-b border-border/50">
+                      {[...REVENUE_TYPES, "Total"].map((type) => (
+                        <React.Fragment key={`${type}-sub`}>
+                          <TableHead className="text-center border-r border-border/10 text-[8px] md:text-[9px] uppercase tracking-widest font-black text-muted-foreground/70 py-2 md:py-3">
+                            Qty.
+                          </TableHead>
+                          <TableHead className="text-center border-r border-border/40 text-[8px] md:text-[9px] uppercase tracking-widest font-black text-primary py-2 md:py-3 bg-primary/[0.02] last:border-r-0">
+                            Amount
+                          </TableHead>
+                        </React.Fragment>
+                      ))}
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody className="[&_tr:nth-child(even)]:bg-muted/10">
+                    {MONTS_LABELS.map((month) => {
+                      let totalQty = 0;
+                      let totalAmount = 0;
+                      return (
+                        <TableRow
+                          key={month}
+                          className="hover:bg-primary/10 transition-colors group border-b border-border/30 last:border-0"
+                        >
+                          <TableCell className="font-black border-r border-border/60 sticky left-0 bg-card/95 backdrop-blur-md z-20 w-[120px] md:w-[150px] text-secondary group-hover:text-primary transition-colors shadow-[4px_0_12px_rgba(0,0,0,0.05)] py-4 md:py-5 text-xs md:text-sm">
+                            {month}
+                          </TableCell>
+                          {REVENUE_TYPES.map((type) => {
+                            const data = REVENUE_OVERVIEW_DATA[type]?.[month];
+                            if (data?.qty) totalQty += data.qty;
+                            if (data?.amount) totalAmount += data.amount;
+                            return (
+                              <React.Fragment key={`${month}-${type}`}>
+                                <TableCell className="text-center border-r border-border/10 text-[10px] md:text-xs font-bold text-muted-foreground/60 py-4 md:py-5">
+                                  {data?.qty || "—"}
+                                </TableCell>
+                                <TableCell className="text-center border-r border-border/40 text-[11px] md:text-sm font-black py-4 md:py-5 bg-primary/[0.01] last:border-r-0">
+                                  {data?.amount ? (
+                                    <span className="text-primary font-black">
+                                      {data.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                                    </span>
+                                  ) : (
+                                    <span className="opacity-20 text-[10px] font-medium">0.00</span>
+                                  )}
+                                </TableCell>
+                              </React.Fragment>
+                            );
+                          })}
+                          <TableCell className="text-center border-r border-border/10 text-[10px] md:text-xs font-bold text-muted-foreground/60 py-4 md:py-5 bg-primary/5">
+                            {totalQty || "—"}
+                          </TableCell>
+                          <TableCell className="text-center text-[11px] md:text-sm font-black py-4 md:py-5 bg-primary/5">
+                            {totalAmount ? (
+                              <span className="text-primary font-black">
+                                {totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                              </span>
+                            ) : (
+                              <span className="opacity-20 text-[10px] font-medium">0.00</span>
+                            )}
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
                 </Table>
               </div>
