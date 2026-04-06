@@ -1315,6 +1315,83 @@ export const FinancialReports: React.FC<FinancialReportsProps> = ({
             </CardContent>
           </Card>
         </TabsContent>
+
+        <TabsContent value="sales_invoices" className="w-full">
+          <Card className="card-elevated overflow-hidden border-none shadow-2xl bg-card w-full">
+            <CardHeader className="bg-secondary text-white p-4 md:p-6 border-b-4 border-primary">
+              <div className="flex items-center justify-between gap-4">
+                <div className="bg-primary/20 p-2 rounded-lg shrink-0">
+                  <FileText className="w-5 h-5 md:w-6 md:h-6 text-primary-light" />
+                </div>
+                <div className="text-right flex-1 min-w-0">
+                  <CardTitle className="text-base md:text-xl font-black tracking-tight truncate">
+                    فواتير المبيعات
+                  </CardTitle>
+                  <p className="text-[10px] md:text-xs text-secondary-foreground/60 mt-0.5 md:mt-1 font-medium truncate">
+                    سجل الفواتير الضريبية مع تفاصيل العملاء والمنتجات
+                  </p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="p-0">
+              <div className="overflow-x-auto">
+                <Table dir="rtl" className="min-w-[1200px]">
+                  <TableHeader>
+                    <TableRow className="bg-secondary/5 border-b border-border/50">
+                      <TableHead className="text-right font-black text-secondary text-[10px] md:text-xs py-4 w-[50px]">رقم الفاتورة</TableHead>
+                      <TableHead className="text-right font-black text-secondary text-[10px] md:text-xs py-4">نوع المستند</TableHead>
+                      <TableHead className="text-right font-black text-secondary text-[10px] md:text-xs py-4">اسم العميل</TableHead>
+                      <TableHead className="text-right font-black text-secondary text-[10px] md:text-xs py-4">رقم التسجيل الضريبي</TableHead>
+                      <TableHead className="text-right font-black text-secondary text-[10px] md:text-xs py-4">العنوان</TableHead>
+                      <TableHead className="text-center font-black text-secondary text-[10px] md:text-xs py-4">التاريخ</TableHead>
+                      <TableHead className="text-right font-black text-secondary text-[10px] md:text-xs py-4">المنتج</TableHead>
+                      <TableHead className="text-center font-black text-secondary text-[10px] md:text-xs py-4">سعر الوحدة</TableHead>
+                      <TableHead className="text-center font-black text-secondary text-[10px] md:text-xs py-4">الكمية</TableHead>
+                      <TableHead className="text-center font-black text-secondary text-[10px] md:text-xs py-4">الإجمالي</TableHead>
+                      <TableHead className="text-center font-black text-secondary text-[10px] md:text-xs py-4">الصافي</TableHead>
+                      <TableHead className="text-center font-black text-secondary text-[10px] md:text-xs py-4">الضريبة</TableHead>
+                      <TableHead className="text-center font-black text-primary text-[10px] md:text-xs py-4">الإجمالي الكلي</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {SALES_INVOICES.map((inv) => (
+                      <TableRow key={inv.invoiceNo} className="hover:bg-primary/10 transition-colors border-b border-border/30">
+                        <TableCell className="text-right text-xs md:text-sm font-bold text-muted-foreground py-4">{inv.invoiceNo}</TableCell>
+                        <TableCell className="text-right text-xs md:text-sm py-4">
+                          <Badge variant={inv.docType === 1 ? "secondary" : "outline"} className="text-[10px]">
+                            {inv.docType === 1 ? "شركات" : "مستهلك نهائي"}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="text-right text-xs md:text-sm font-bold text-foreground py-4">{inv.customer}</TableCell>
+                        <TableCell className="text-right text-xs md:text-sm text-muted-foreground py-4">{inv.taxRegNo || "—"}</TableCell>
+                        <TableCell className="text-right text-xs md:text-sm text-muted-foreground py-4">{inv.address}</TableCell>
+                        <TableCell className="text-center text-xs md:text-sm text-muted-foreground py-4">{inv.date}</TableCell>
+                        <TableCell className="text-right text-xs md:text-sm font-bold text-foreground py-4">{inv.product}</TableCell>
+                        <TableCell className="text-center text-xs md:text-sm py-4">{inv.unitPrice.toLocaleString()}</TableCell>
+                        <TableCell className="text-center text-xs md:text-sm py-4">{inv.qty}</TableCell>
+                        <TableCell className="text-center text-xs md:text-sm py-4">{inv.totalAmount.toLocaleString()}</TableCell>
+                        <TableCell className="text-center text-xs md:text-sm py-4">{inv.netAmount.toLocaleString()}</TableCell>
+                        <TableCell className="text-center text-xs md:text-sm py-4">{inv.taxValue.toLocaleString()}</TableCell>
+                        <TableCell className="text-center text-xs md:text-sm font-black text-primary py-4">{inv.grandTotal.toLocaleString()}</TableCell>
+                      </TableRow>
+                    ))}
+                    <TableRow className="bg-primary/5 font-black border-t-2 border-primary/30">
+                      <TableCell colSpan={7} className="text-right text-sm py-5 text-primary">
+                        الإجمالي ({SALES_INVOICES.length} فاتورة)
+                      </TableCell>
+                      <TableCell />
+                      <TableCell className="text-center text-sm py-5">{SALES_INVOICES.reduce((s, i) => s + i.qty, 0)}</TableCell>
+                      <TableCell className="text-center text-sm py-5">{SALES_INVOICES.reduce((s, i) => s + i.totalAmount, 0).toLocaleString()}</TableCell>
+                      <TableCell className="text-center text-sm py-5">{SALES_INVOICES.reduce((s, i) => s + i.netAmount, 0).toLocaleString()}</TableCell>
+                      <TableCell className="text-center text-sm py-5">{SALES_INVOICES.reduce((s, i) => s + i.taxValue, 0).toLocaleString()}</TableCell>
+                      <TableCell className="text-center text-sm py-5 text-primary font-black">{SALES_INVOICES.reduce((s, i) => s + i.grandTotal, 0).toLocaleString()}</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
       </Tabs>
     </div>
   );
