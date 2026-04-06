@@ -114,38 +114,38 @@ const REVENUE_OVERVIEW_DATA: Record<
 };
 
 const SUBSCRIPTION_PLANS = [
-  { name: "J-Plane 1", price: 100, role: "باحث عن عمل" },
-  { name: "J-Plane 2", price: 200, role: "باحث عن عمل" },
-  { name: "J-Plane 3", price: 300, role: "باحث عن عمل" },
-  { name: "J-Plane 4", price: 400, role: "باحث عن عمل" },
-  { name: "J-Plane 5", price: 500, role: "باحث عن عمل" },
-  { name: "J-Plane 6", price: 600, role: "باحث عن عمل" },
-  { name: "J-Plane 7", price: 700, role: "باحث عن عمل" },
-  { name: "J-Plane 8", price: 800, role: "باحث عن عمل" },
-  { name: "J-Plane 9", price: 900, role: "باحث عن عمل" },
-  { name: "J-Plane 10", price: 1000, role: "باحث عن عمل" },
-  { name: "C-Plane 1", price: 1000, role: "شركة" },
-  { name: "C-Plane 2", price: 2000, role: "شركة" },
-  { name: "C-Plane 4", price: 4000, role: "شركة" },
-  { name: "C-Plane 5", price: 5000, role: "شركة" },
-  { name: "C-Plane 6", price: 6000, role: "شركة" },
-  { name: "C-Plane 7", price: 7000, role: "شركة" },
-  { name: "C-Plane 8", price: 8000, role: "شركة" },
-  { name: "C-Plane 9", price: 9000, role: "شركة" },
-  { name: "C-Plane 10", price: 10000, role: "شركة" },
-  { name: "Co-Plane 1", price: 500, role: "كاتب سيرة ذاتية" },
-  { name: "Co-Plane 2", price: 6000, role: "كاتب سيرة ذاتية" },
-  { name: "A-Plane 1", price: 10, role: "إعلان" },
-  { name: "A-Plane 2", price: 20, role: "إعلان" },
-  { name: "A-Plane 3", price: 30, role: "إعلان" },
-  { name: "A-Plane 4", price: 40, role: "إعلان" },
-  { name: "A-Plane 5", price: 50, role: "إعلان" },
-  { name: "A-Plane 6", price: 60, role: "إعلان" },
-  { name: "A-Plane 7", price: 70, role: "إعلان" },
-  { name: "A-Plane 8", price: 80, role: "إعلان" },
-  { name: "A-Plane 9", price: 90, role: "إعلان" },
-  { name: "A-Plane 10", price: 100, role: "إعلان" },
-  { name: "T-A", price: 1, role: "قالب" },
+  { name: "J-Plane 1", price: 100, role: "باحث عن عمل", startDate: "01.01.2026", endDate: "31.01.2026" },
+  { name: "J-Plane 2", price: 200, role: "باحث عن عمل", startDate: "01.02.2026", endDate: "29.02.2026" },
+  { name: "J-Plane 3", price: 300, role: "باحث عن عمل", startDate: "01.03.2026", endDate: "31.03.2026" },
+  { name: "J-Plane 4", price: 400, role: "باحث عن عمل", startDate: "01.04.2026", endDate: "30.04.2026" },
+  { name: "J-Plane 5", price: 500, role: "باحث عن عمل", startDate: "01.05.2026", endDate: "31.05.2026" },
+  { name: "J-Plane 6", price: 600, role: "باحث عن عمل", startDate: "01.06.2026", endDate: "30.06.2026" },
+  { name: "J-Plane 7", price: 700, role: "باحث عن عمل", startDate: "01.07.2026", endDate: "31.07.2026" },
+  { name: "J-Plane 8", price: 800, role: "باحث عن عمل", startDate: "01.08.2026", endDate: "31.08.2026" },
+  { name: "J-Plane 9", price: 900, role: "باحث عن عمل", startDate: "01.09.2026", endDate: "30.09.2026" },
+  { name: "J-Plane 10", price: 1000, role: "باحث عن عمل", startDate: "01.10.2026", endDate: "31.10.2026" },
+  { name: "C-Plane 1", price: 1000, role: "شركة", startDate: "01.11.2026", endDate: "30.11.2026" },
+  { name: "C-Plane 2", price: 2000, role: "شركة", startDate: "01.12.2026", endDate: "31.12.2026" },
+  { name: "C-Plane 4", price: 4000, role: "شركة", startDate: "", endDate: "" },
+  { name: "C-Plane 5", price: 5000, role: "شركة", startDate: "", endDate: "" },
+  { name: "C-Plane 6", price: 6000, role: "شركة", startDate: "", endDate: "" },
+  { name: "C-Plane 7", price: 7000, role: "شركة", startDate: "", endDate: "" },
+  { name: "C-Plane 8", price: 8000, role: "شركة", startDate: "", endDate: "" },
+  { name: "C-Plane 9", price: 9000, role: "شركة", startDate: "", endDate: "" },
+  { name: "C-Plane 10", price: 10000, role: "شركة", startDate: "", endDate: "" },
+  { name: "Co-Plane 1", price: 500, role: "كاتب سيرة ذاتية", startDate: "", endDate: "" },
+  { name: "Co-Plane 2", price: 6000, role: "كاتب سيرة ذاتية", startDate: "", endDate: "" },
+  { name: "A-Plane 1", price: 10, role: "إعلان", startDate: "", endDate: "" },
+  { name: "A-Plane 2", price: 20, role: "إعلان", startDate: "", endDate: "" },
+  { name: "A-Plane 3", price: 30, role: "إعلان", startDate: "", endDate: "" },
+  { name: "A-Plane 4", price: 40, role: "إعلان", startDate: "", endDate: "" },
+  { name: "A-Plane 5", price: 50, role: "إعلان", startDate: "", endDate: "" },
+  { name: "A-Plane 6", price: 60, role: "إعلان", startDate: "", endDate: "" },
+  { name: "A-Plane 7", price: 70, role: "إعلان", startDate: "", endDate: "" },
+  { name: "A-Plane 8", price: 80, role: "إعلان", startDate: "", endDate: "" },
+  { name: "A-Plane 9", price: 90, role: "إعلان", startDate: "", endDate: "" },
+  { name: "A-Plane 10", price: 100, role: "إعلان", startDate: "", endDate: "" },
+  { name: "T-A", price: 1, role: "قالب", startDate: "", endDate: "" },
 ];
 
 export const FinancialReports: React.FC<FinancialReportsProps> = ({
@@ -1233,6 +1233,12 @@ export const FinancialReports: React.FC<FinancialReportsProps> = ({
                     <TableHead className="text-center font-black text-secondary text-xs md:text-sm py-4">
                       دور المستخدم
                     </TableHead>
+                    <TableHead className="text-center font-black text-secondary text-xs md:text-sm py-4">
+                      تاريخ البداية
+                    </TableHead>
+                    <TableHead className="text-center font-black text-secondary text-xs md:text-sm py-4">
+                      تاريخ النهاية
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -1257,6 +1263,12 @@ export const FinancialReports: React.FC<FinancialReportsProps> = ({
                           {plan.role}
                         </Badge>
                       </TableCell>
+                      <TableCell className="text-center text-xs md:text-sm text-muted-foreground py-4">
+                        {plan.startDate || "—"}
+                      </TableCell>
+                      <TableCell className="text-center text-xs md:text-sm text-muted-foreground py-4">
+                        {plan.endDate || "—"}
+                      </TableCell>
                     </TableRow>
                   ))}
                   <TableRow className="bg-primary/5 font-black border-t-2 border-primary/30">
@@ -1266,6 +1278,8 @@ export const FinancialReports: React.FC<FinancialReportsProps> = ({
                     <TableCell className="text-center text-sm py-5 text-primary font-black">
                       {SUBSCRIPTION_PLANS.reduce((sum, p) => sum + p.price, 0).toLocaleString()} ر.س
                     </TableCell>
+                    <TableCell />
+                    <TableCell />
                     <TableCell />
                   </TableRow>
                 </TableBody>
