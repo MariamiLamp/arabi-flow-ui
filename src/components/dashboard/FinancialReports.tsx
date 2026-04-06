@@ -256,6 +256,10 @@ export const FinancialReports: React.FC<FinancialReportsProps> = ({
             <LayoutTemplate className="w-4 h-4" />
             دفعات القوالب
           </TabsTrigger>
+          <TabsTrigger value="monthly_table" className="gap-2">
+            <FileText className="w-4 h-4" />
+            الجدول الشهري
+          </TabsTrigger>
           <TabsTrigger value="revenue_overview" className="gap-2">
             <FileText className="w-4 h-4" />
             نظرة عامة على الإيرادات
