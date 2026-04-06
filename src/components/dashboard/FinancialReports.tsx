@@ -122,6 +122,9 @@ export const FinancialReports: React.FC<FinancialReportsProps> = ({
 }) => {
   const [activeChartGroup, setActiveChartGroup] =
     useState<string>(initialChart);
+  
+  const currentMonthIndex = new Date().getMonth(); // 0-based (Apr = 3)
+  const [selectedMonthIndex, setSelectedMonthIndex] = useState(currentMonthIndex);
 
   const getFilteredTotal = (type: string) => {
     return payments
