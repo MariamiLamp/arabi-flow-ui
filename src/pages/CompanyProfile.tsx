@@ -186,9 +186,9 @@ const CompanyProfile = () => {
                   className={cn(
                     "w-5 h-5",
                     star <= Math.floor(company.rating)
-                      ? "text-yellow-500 fill-yellow-500"
+                      ? "text-primary fill-primary"
                       : star - 0.5 <= company.rating
-                      ? "text-yellow-500 fill-yellow-500/50"
+                      ? "text-primary fill-primary/50"
                       : "text-muted-foreground/30"
                   )}
                 />
@@ -287,9 +287,9 @@ const CompanyProfile = () => {
                         <div className={cn(
                           "text-sm font-bold px-3 py-1.5 rounded-full",
                           job.matchScore >= 80
-                            ? "bg-emerald-500/10 text-emerald-600"
+                            ? "bg-primary/10 text-primary"
                             : job.matchScore >= 60
-                            ? "bg-yellow-500/10 text-yellow-600"
+                            ? "bg-accent text-accent-foreground"
                             : "bg-muted text-muted-foreground"
                         )}>
                           {job.matchScore}% تطابق
