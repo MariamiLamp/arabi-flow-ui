@@ -111,26 +111,23 @@ export default function About() {
 
       <main className="flex-1 pt-20">
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border/40">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-secondary/10" />
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-primary/20 blur-3xl" />
-        <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-secondary/20 blur-3xl" />
-
-        <div className="container relative mx-auto px-6 py-20 md:py-28">
-          <Badge variant="secondary" className="mb-6 gap-2">
-            <Sparkles className="w-3.5 h-3.5" />
-            About CareerBook
-          </Badge>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 max-w-3xl">
-            Career Book.{" "}
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Built for Scale.
-            </span>
+      <section className="relative py-20 overflow-hidden bg-primary/5">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background -z-10"></div>
+        <div className="container mx-auto px-6 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 animate-fade-down">
+            <Sparkles className="w-4 h-4" />
+            <span>About CareerBook</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight animate-fade-up">
+            مبني <span className="text-primary">للتوسع</span>
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-            Career Book helps companies build talent systems, professionals build intentional
-            careers, trainers build better programs, and brands reach their audiences — through
-            intelligence, not guesswork.
+          <p
+            className="text-xl text-muted-foreground max-w-2xl mx-auto font-medium animate-fade-up"
+            style={{ animationDelay: "100ms" }}
+          >
+            Career Book يساعد الشركات على بناء أنظمة المواهب، والمحترفين على بناء مسارات
+            مهنية مدروسة، والمدربين على تطوير برامج أفضل، والعلامات التجارية على الوصول
+            لجمهورها — بالذكاء، لا بالتخمين.
           </p>
         </div>
       </section>
