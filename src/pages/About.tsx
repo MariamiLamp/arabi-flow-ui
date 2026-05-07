@@ -284,6 +284,8 @@ export default function About() {
           </div>
         </div>
       </section>
-    </GuestLayout>
+      </main>
+      <Footer />
+    </div>
   );
 }
