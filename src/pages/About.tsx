@@ -1,4 +1,4 @@
-import { GuestLayout } from "@/components/layout/GuestLayout";
+import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,9 @@ import {
   Megaphone,
   ArrowLeft,
   CheckCircle2,
+  BookOpen,
+  User,
+  BookOpen as BookIcon,
 } from "lucide-react";
 
 const values = [
