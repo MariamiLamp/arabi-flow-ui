@@ -205,6 +205,37 @@ export default function About() {
         </div>
       </section>
 
+      {/* Slogan & Taglines */}
+      <section className="bg-gradient-to-br from-primary/5 via-background to-secondary/5 border-y border-border/40 py-16 md:py-20">
+        <div className="container mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <Badge variant="outline" className="mb-4">Slogan & Key Message</Badge>
+            <Quote className="w-10 h-10 text-primary mx-auto mb-4 opacity-60" />
+            <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">
+              Career Book. <span className="text-primary">Built for Scale.</span>
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed italic">
+              "Career Book helps companies build talent systems, professionals build intentional
+              careers, trainers build better programs, and brands reach their audiences — through
+              intelligence, not guesswork."
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+            {taglines.map((t) => (
+              <Card key={t.brand} className="border-border/60 hover:border-primary/40 transition-all">
+                <CardContent className="p-5">
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">
+                    {t.brand}
+                  </p>
+                  <p className="text-base font-semibold text-foreground">"{t.tagline}"</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* What makes us different */}
       <section className="bg-muted/30 border-y border-border/40 py-16 md:py-20">
         <div className="container mx-auto px-6">
