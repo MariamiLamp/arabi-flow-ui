@@ -18,8 +18,49 @@ import {
   CheckCircle2,
   BookOpen,
   User,
-  BookOpen as BookIcon,
+  MessageCircle,
+  Zap,
+  ArrowRight,
+  Quote,
+  Ban,
+  XCircle,
+  Rocket,
 } from "lucide-react";
+
+const voicePrinciples = [
+  { quality: "Clear", rule: "Plain language. Short sentences. If it can be said in 10 words, do not use 20." },
+  { quality: "Insightful", rule: "Say something the audience has not heard phrased this way before. Reframe the obvious." },
+  { quality: "Direct", rule: "Put the insight in the first sentence. Never bury it under three paragraphs of context." },
+  { quality: "Confident", rule: "State positions without hedging. 'This works because' is stronger than 'This might work.'" },
+  { quality: "Honest", rule: "Do not oversell. One honest sentence outperforms five excited ones every time." },
+  { quality: "Specific", rule: "Name the industry, the role, the salary range, the mistake. Specificity builds credibility." },
+];
+
+const taglines = [
+  { brand: "Career Book Master", tagline: "Career Book. Built for Scale." },
+  { brand: "Career Book Ecosystem", tagline: "Build Systems. Not Just Teams." },
+  { brand: "Career Book Academy", tagline: "Learn How the Market Actually Works." },
+  { brand: "Academy — For Trainers", tagline: "Structure Your Expertise. Scale Your Impact." },
+  { brand: "Career Book Marketing", tagline: "Reach in a Strategic Way. Not Guesswork." },
+];
+
+const neverSay = [
+  { phrase: "Dream big", why: "Vague motivation. We deal in systems and intelligence." },
+  { phrase: "Follow your passion", why: "Dangerous career advice. We teach market-first thinking." },
+  { phrase: "We're a family", why: "Overused and unprofessional. We are a high-performance team." },
+  { phrase: "Holistic approach", why: "Meaningless. Describe the actual methodology." },
+  { phrase: "Success in 30 days", why: "False promises damage brand credibility permanently." },
+  { phrase: "Game changer", why: "Almost certainly not. Describe the specific impact instead." },
+];
+
+const neverTalkAbout = [
+  "Motivational content with no practical application ('hustle harder', 'Monday motivation').",
+  "Celebrity career stories with no structural insight.",
+  "Political commentary not directly tied to the labor market.",
+  "Reactive content on viral topics unrelated to careers, talent, or marketing.",
+  "Generic productivity tips not connected to career or smart systems.",
+  "Content that promotes other brands as 'amazing' or 'game-changing'.",
+];
 
 const values = [
   { icon: Lightbulb, title: "Clarity", desc: "We simplify complex problems in career, talent, and marketing. Complexity is our work, not the client's." },
