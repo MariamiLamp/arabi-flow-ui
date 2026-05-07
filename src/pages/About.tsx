@@ -64,7 +64,52 @@ const notList = [
 
 export default function About() {
   return (
-    <GuestLayout>
+    <div className="min-h-screen bg-background flex flex-col" dir="rtl">
+      {/* Header */}
+      <header className="h-20 border-b border-border/40 fixed top-0 w-full bg-background/95 backdrop-blur-xl z-50 transition-all duration-500 shadow-sm">
+        <div className="container mx-auto h-full px-6 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-4">
+            <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-primary via-primary/80 to-secondary flex items-center justify-center shadow-lg shadow-primary/20 group hover:shadow-primary/30 transition-all duration-300">
+              <BookOpen className="w-6 h-6 text-primary-foreground" />
+              <div className="absolute -top-1 -right-1 w-5 h-5 bg-primary rounded-full flex items-center justify-center">
+                <Sparkles className="w-3 h-3 text-white" />
+              </div>
+            </div>
+            <div className="hidden sm:block" dir="ltr">
+              <h1 className="text-2xl font-bold tracking-tight">
+                <span className="text-primary font-extralight">Career</span>
+                <span className="text-foreground font-black">Book</span>
+              </h1>
+              <p className="text-xs text-muted-foreground tracking-widest uppercase mt-1">
+                • منصة التوظيف الذكية •
+              </p>
+            </div>
+          </Link>
+
+          <nav className="hidden md:flex items-center gap-10">
+            <Link to="/" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              الرئيسية
+            </Link>
+          </nav>
+
+          <div className="flex items-center gap-4">
+            <Link to="/auth">
+              <Button variant="ghost" size="sm" className="font-medium">
+                <User className="w-4 h-4 ml-2" />
+                تسجيل الدخول
+              </Button>
+            </Link>
+            <Link to="/register">
+              <Button size="sm" className="font-medium shadow-lg shadow-primary/20">
+                <Target className="w-4 h-4 ml-2" />
+                انضم إلينا
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      <main className="flex-1 pt-20">
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-border/40">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-secondary/10" />
