@@ -18,8 +18,49 @@ import {
   CheckCircle2,
   BookOpen,
   User,
-  BookOpen as BookIcon,
+  MessageCircle,
+  Zap,
+  ArrowRight,
+  Quote,
+  Ban,
+  XCircle,
+  Rocket,
 } from "lucide-react";
+
+const voicePrinciples = [
+  { quality: "Clear", rule: "Plain language. Short sentences. If it can be said in 10 words, do not use 20." },
+  { quality: "Insightful", rule: "Say something the audience has not heard phrased this way before. Reframe the obvious." },
+  { quality: "Direct", rule: "Put the insight in the first sentence. Never bury it under three paragraphs of context." },
+  { quality: "Confident", rule: "State positions without hedging. 'This works because' is stronger than 'This might work.'" },
+  { quality: "Honest", rule: "Do not oversell. One honest sentence outperforms five excited ones every time." },
+  { quality: "Specific", rule: "Name the industry, the role, the salary range, the mistake. Specificity builds credibility." },
+];
+
+const taglines = [
+  { brand: "Career Book Master", tagline: "Career Book. Built for Scale." },
+  { brand: "Career Book Ecosystem", tagline: "Build Systems. Not Just Teams." },
+  { brand: "Career Book Academy", tagline: "Learn How the Market Actually Works." },
+  { brand: "Academy — For Trainers", tagline: "Structure Your Expertise. Scale Your Impact." },
+  { brand: "Career Book Marketing", tagline: "Reach in a Strategic Way. Not Guesswork." },
+];
+
+const neverSay = [
+  { phrase: "Dream big", why: "Vague motivation. We deal in systems and intelligence." },
+  { phrase: "Follow your passion", why: "Dangerous career advice. We teach market-first thinking." },
+  { phrase: "We're a family", why: "Overused and unprofessional. We are a high-performance team." },
+  { phrase: "Holistic approach", why: "Meaningless. Describe the actual methodology." },
+  { phrase: "Success in 30 days", why: "False promises damage brand credibility permanently." },
+  { phrase: "Game changer", why: "Almost certainly not. Describe the specific impact instead." },
+];
+
+const neverTalkAbout = [
+  "Motivational content with no practical application ('hustle harder', 'Monday motivation').",
+  "Celebrity career stories with no structural insight.",
+  "Political commentary not directly tied to the labor market.",
+  "Reactive content on viral topics unrelated to careers, talent, or marketing.",
+  "Generic productivity tips not connected to career or smart systems.",
+  "Content that promotes other brands as 'amazing' or 'game-changing'.",
+];
 
 const values = [
   { icon: Lightbulb, title: "Clarity", desc: "We simplify complex problems in career, talent, and marketing. Complexity is our work, not the client's." },
@@ -164,6 +205,37 @@ export default function About() {
         </div>
       </section>
 
+      {/* Slogan & Taglines */}
+      <section className="bg-gradient-to-br from-primary/5 via-background to-secondary/5 border-y border-border/40 py-16 md:py-20">
+        <div className="container mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <Badge variant="outline" className="mb-4">Slogan & Key Message</Badge>
+            <Quote className="w-10 h-10 text-primary mx-auto mb-4 opacity-60" />
+            <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">
+              Career Book. <span className="text-primary">Built for Scale.</span>
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed italic">
+              "Career Book helps companies build talent systems, professionals build intentional
+              careers, trainers build better programs, and brands reach their audiences — through
+              intelligence, not guesswork."
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+            {taglines.map((t) => (
+              <Card key={t.brand} className="border-border/60 hover:border-primary/40 transition-all">
+                <CardContent className="p-5">
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">
+                    {t.brand}
+                  </p>
+                  <p className="text-base font-semibold text-foreground">"{t.tagline}"</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* What makes us different */}
       <section className="bg-muted/30 border-y border-border/40 py-16 md:py-20">
         <div className="container mx-auto px-6">
@@ -252,6 +324,91 @@ export default function About() {
             </div>
           </CardContent>
         </Card>
+      </section>
+
+      {/* Voice Principles */}
+      <section className="bg-muted/30 border-y border-border/40 py-16 md:py-20">
+        <div className="container mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <Badge variant="outline" className="mb-4">
+              <MessageCircle className="w-3 h-3 ml-1" />
+              Voice Principles
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">How we communicate</h2>
+            <p className="text-muted-foreground">
+              Six rules that govern every word we publish — from posts to proposals.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+            {voicePrinciples.map((p, i) => (
+              <Card key={p.quality} className="group border-border/60 hover:border-primary/40 hover:-translate-y-1 transition-all">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
+                      0{i + 1}
+                    </div>
+                    <h3 className="text-lg font-bold">{p.quality}</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{p.rule}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* What We Never Say / Talk About */}
+      <section className="container mx-auto px-6 py-16 md:py-20">
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div>
+            <Badge variant="outline" className="mb-4">
+              <Ban className="w-3 h-3 ml-1" />
+              Banned Phrases
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              What we <span className="text-destructive">never</span> say
+            </h2>
+            <p className="text-muted-foreground mb-6 leading-relaxed">
+              These phrases are off-limits. They're vague, dishonest, or damage credibility.
+            </p>
+            <div className="space-y-3">
+              {neverSay.map((n) => (
+                <div key={n.phrase} className="flex items-start gap-3 p-4 rounded-xl bg-card border border-border/50 hover:border-destructive/30 transition-all">
+                  <XCircle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground mb-1">"{n.phrase}"</p>
+                    <p className="text-sm text-muted-foreground">{n.why}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <Badge variant="outline" className="mb-4">
+              <Zap className="w-3 h-3 ml-1" />
+              Off-Topic Content
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              What we <span className="text-destructive">never</span> talk about
+            </h2>
+            <p className="text-muted-foreground mb-6 leading-relaxed">
+              We focus on careers, talent, and smart markets. Anything outside that scope dilutes
+              our message.
+            </p>
+            <Card className="border-border/60">
+              <CardContent className="p-6 space-y-4">
+                {neverTalkAbout.map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-destructive mt-2 shrink-0" />
+                    <p className="text-sm text-foreground/80 leading-relaxed">{item}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </section>
 
       {/* CTA */}
