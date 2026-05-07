@@ -326,6 +326,91 @@ export default function About() {
         </Card>
       </section>
 
+      {/* Voice Principles */}
+      <section className="bg-muted/30 border-y border-border/40 py-16 md:py-20">
+        <div className="container mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <Badge variant="outline" className="mb-4">
+              <MessageCircle className="w-3 h-3 ml-1" />
+              Voice Principles
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">How we communicate</h2>
+            <p className="text-muted-foreground">
+              Six rules that govern every word we publish — from posts to proposals.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+            {voicePrinciples.map((p, i) => (
+              <Card key={p.quality} className="group border-border/60 hover:border-primary/40 hover:-translate-y-1 transition-all">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
+                      0{i + 1}
+                    </div>
+                    <h3 className="text-lg font-bold">{p.quality}</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{p.rule}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* What We Never Say / Talk About */}
+      <section className="container mx-auto px-6 py-16 md:py-20">
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div>
+            <Badge variant="outline" className="mb-4">
+              <Ban className="w-3 h-3 ml-1" />
+              Banned Phrases
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              What we <span className="text-destructive">never</span> say
+            </h2>
+            <p className="text-muted-foreground mb-6 leading-relaxed">
+              These phrases are off-limits. They're vague, dishonest, or damage credibility.
+            </p>
+            <div className="space-y-3">
+              {neverSay.map((n) => (
+                <div key={n.phrase} className="flex items-start gap-3 p-4 rounded-xl bg-card border border-border/50 hover:border-destructive/30 transition-all">
+                  <XCircle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground mb-1">"{n.phrase}"</p>
+                    <p className="text-sm text-muted-foreground">{n.why}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <Badge variant="outline" className="mb-4">
+              <Zap className="w-3 h-3 ml-1" />
+              Off-Topic Content
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              What we <span className="text-destructive">never</span> talk about
+            </h2>
+            <p className="text-muted-foreground mb-6 leading-relaxed">
+              We focus on careers, talent, and smart markets. Anything outside that scope dilutes
+              our message.
+            </p>
+            <Card className="border-border/60">
+              <CardContent className="p-6 space-y-4">
+                {neverTalkAbout.map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-destructive mt-2 shrink-0" />
+                    <p className="text-sm text-foreground/80 leading-relaxed">{item}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="container mx-auto px-6 pb-20">
         <div className="rounded-2xl bg-gradient-to-r from-primary to-secondary p-8 md:p-12 text-center text-primary-foreground relative overflow-hidden">
