@@ -14,6 +14,7 @@ import {
   Target,
   CreditCard,
   Settings,
+  LayoutDashboard,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSidebarState } from "@/contexts/SidebarContext";
