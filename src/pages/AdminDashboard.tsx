@@ -96,6 +96,7 @@ import { AdminDashboardLayout } from "@/components/layout/AdminDashboardLayout";
 import { FinancialReports } from "@/components/dashboard/FinancialReports";
 import { BlogManagement } from "@/components/dashboard/BlogManagement";
 import { SubscriptionManagement } from "@/components/dashboard/SubscriptionManagement";
+import { AdminOverview } from "@/components/dashboard/AdminOverview";
 
 // Mock data - Users
 const mockUsers = [
@@ -458,7 +459,7 @@ const AdminDashboard = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeTab, setActiveTab] = useState("users");
+  const [activeTab, setActiveTab] = useState("overview");
   const [financialChartMode, setFinancialChartMode] = useState<
     "revenue" | "distribution" | "comparison"
   >("revenue");
@@ -946,6 +947,10 @@ const AdminDashboard = () => {
   return (
     <AdminDashboardLayout activeTab={activeTab} onTabChange={setActiveTab}>
       <div className="space-y-6">
+        {activeTab === "overview" ? (
+          <AdminOverview onTabChange={setActiveTab} />
+        ) : (
+          <>
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {stats.map((stat, index) => (
@@ -1894,6 +1899,9 @@ const AdminDashboard = () => {
             <BlogManagement />
           </TabsContent>
         </Tabs>
+        </>
+        )}
+
 
         {/* Template Dialog */}
         <Dialog
