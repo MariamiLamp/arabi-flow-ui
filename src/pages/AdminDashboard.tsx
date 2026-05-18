@@ -96,6 +96,7 @@ import { AdminDashboardLayout } from "@/components/layout/AdminDashboardLayout";
 import { FinancialReports } from "@/components/dashboard/FinancialReports";
 import { BlogManagement } from "@/components/dashboard/BlogManagement";
 import { SubscriptionManagement } from "@/components/dashboard/SubscriptionManagement";
+import { AdminOverview } from "@/components/dashboard/AdminOverview";
 
 // Mock data - Users
 const mockUsers = [
@@ -458,7 +459,7 @@ const AdminDashboard = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeTab, setActiveTab] = useState("users");
+  const [activeTab, setActiveTab] = useState("overview");
   const [financialChartMode, setFinancialChartMode] = useState<
     "revenue" | "distribution" | "comparison"
   >("revenue");

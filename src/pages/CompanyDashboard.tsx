@@ -85,6 +85,7 @@ import { StatCard } from "@/components/dashboard/StatCard";
 import JobForm, { JobFormData } from "@/components/dashboard/JobForm";
 import CompanyProfileTab from "@/components/dashboard/CompanyProfileTab";
 import CompanySettingsTab from "@/components/dashboard/CompanySettingsTab";
+import { CompanyOverview } from "@/components/dashboard/CompanyOverview";
 
 // Mock data
 const initialJobs = [
@@ -369,7 +370,7 @@ const CompanyDashboard = () => {
     status: "",
   });
 
-  const [activeTab, setActiveTab] = useState("jobs");
+  const [activeTab, setActiveTab] = useState("overview");
 
 
   const handleAddJobData = (data: JobFormData) => {
@@ -2245,6 +2246,9 @@ const CompanyDashboard = () => {
   return (
     <CompanyDashboardLayout activeTab={activeTab} onTabChange={setActiveTab}>
       <div className="space-y-6">
+        {activeTab === "overview" && (
+          <CompanyOverview companyName={companyInfo.name} onTabChange={setActiveTab} />
+        )}
         {activeTab === "jobs" && renderJobs()}
         {activeTab === "applications" && renderApplications()}
         {activeTab === "promotion" && renderPromotion()}
