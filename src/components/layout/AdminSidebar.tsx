@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSidebarState } from "@/contexts/SidebarContext";
+import { LayoutDashboard } from "lucide-react";
 
 interface AdminSidebarProps {
   activeTab: string;
@@ -29,6 +30,7 @@ interface AdminSidebarProps {
 const navGroups = [
   {
     items: [
+      { icon: LayoutDashboard, label: "نظرة عامة", value: "overview" },
       { icon: Users, label: "الباحثين عن عمل", value: "users" },
       { icon: Building2, label: "الشركات", value: "companies" },
       { icon: UserCheck, label: "موظفي HR", value: "hr" },
