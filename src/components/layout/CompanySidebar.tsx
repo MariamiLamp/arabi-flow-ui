@@ -27,6 +27,7 @@ interface CompanySidebarProps {
 const navGroups = [
   {
     items: [
+      { icon: LayoutDashboard, label: "نظرة عامة", value: "overview" },
       { icon: Briefcase, label: "الوظائف", value: "jobs" },
       { icon: FileText, label: "الطلبات", value: "applications" },
       { icon: User, label: "الملف الشخصي", value: "profile" },
