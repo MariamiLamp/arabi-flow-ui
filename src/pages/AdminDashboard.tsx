@@ -1899,6 +1899,9 @@ const AdminDashboard = () => {
             <BlogManagement />
           </TabsContent>
         </Tabs>
+        </>
+        )}
+
 
         {/* Template Dialog */}
         <Dialog
